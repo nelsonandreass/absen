@@ -1,0 +1,46 @@
+body{
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #EBF5F7 !important;
+}
+.bg-primary{
+    background-color: #9eb3c2 !important;
+}
+
+.card{
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, .05) 3px px;
+}
+.card-header{
+    border-radius: 20px 20px 0 0!important;
+    background-color: #9eb3c2 !important;
+}
+
+.img-fluid{
+    max-height: 20px !important;
+}
+.barcode{
+    max-height: 100px !important;
+}
+.icon{
+    max-height: 30px !important;
+    max-width: 50px !important;
+}
+.text-color-primary{
+    font-family: 'Poppins', sans-serif !important;
+    color: #9eb3c2 !important;
+}
+.profile{
+    max-height: 250px !important;
+}
+.text-decor-none{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+.title{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.login-form{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
