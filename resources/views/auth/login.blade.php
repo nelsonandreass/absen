@@ -19,7 +19,9 @@
 
         <div class="row">
             <div class="col-9 login-text-help">Lupa Password?</div>
-            <div class="col-3 text-right login-text-help">Daftar</div>
+            <div class="col-3 text-right login-text-help">
+                <a href="{{route('register.index')}}" class="text-decor-none">Daftar</a>
+            </div>
         </div>
     </form>
     <div class="row hero fixed-bottom">

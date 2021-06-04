@@ -14,10 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('/home' , 'HomeController');
-Route::resource('/berita' , 'BeritaController');
-Route::resource('/ayat' , 'AyatController');
-Route::resource('/profile' , 'ProfileController');
+
+Route::group(['middleware' => 'authweb'],function(){
+    Route::resource('/home' , 'HomeController');
+    Route::resource('/berita' , 'BeritaController');
+    Route::resource('/ayat' , 'AyatController');
+    Route::resource('/profile' , 'ProfileController');
+});
+
 
 Route::resource('/login' ,'LoginController');
 Route::resource('/register' ,'RegisterController');

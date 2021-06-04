@@ -47,7 +47,8 @@ class AyatController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Ayat::find($id)->first();
+        return view('ayat.show' , ['active' => "Ayat" , 'data' => $data]);
     }
 
     /**

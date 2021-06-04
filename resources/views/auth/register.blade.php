@@ -15,7 +15,13 @@
         <input type="text" name="name" placeholder="Nama" class="form-control mb-3">
         <input type="text" name="email" placeholder="Email Address" class="form-control mb-3">
         <input type="password" name="password" placeholder="Password" class="form-control mb-3">
-        <button class="btn color-primary btn-primary mb-3">Masuk</button>
+        <button class="btn color-primary btn-primary mb-3">Daftar</button>
+        <div class="row">
+        <div class="col-5"></div>
+            <div class="col-7 text-right login-text-help">
+                <a href="{{route('login.index')}}" class="text-decor-none">Sudah punya akun?</a>
+            </div>
+        </div>
     </form>
     <div class="row hero fixed-bottom">
         <img src="{{asset('assets/img/hero.png')}}" alt="">

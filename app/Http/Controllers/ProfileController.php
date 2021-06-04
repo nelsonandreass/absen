@@ -71,11 +71,12 @@ class ProfileController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $data = $request->input('nomortelepon');
+        $telepon = $request->input('nomortelepon');
+        $alamat = $request->input('alamat'); 
         $update = User::where('id' , $id)->update([
-            'nomor_telepon' => $data,
+            'nomor_telepon' => $telepon,
+            'alamat' => $alamat
         ]);
-return "true";
     }
 
     /**

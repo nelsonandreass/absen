@@ -12,7 +12,7 @@ body{
 }
 .card-header{
     border-radius: 20px 20px 0 0!important;
-    background-color: #189AB4 !important;
+    background-color: #68BBE3 !important;
 }
 
 .img-fluid{
@@ -52,7 +52,7 @@ body{
     width: .5rem !important;
     height: .5rem !important;
     border-radius: 100px !important;
-    background-color: black;
+    background-color: #055C9D !important;
 }
 .nav-active{
     max-height: 25px !important;
@@ -73,4 +73,8 @@ body{
 }
 .hero{
     margin-bottom: -15px !important;
+}
+.back-button{
+    border-radius: 0 15px 15px 0;
+    height: 3rem;
 }

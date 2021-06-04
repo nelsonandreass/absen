@@ -25,7 +25,7 @@
         </div>
         
 
-       <form action="{{route('profile.update',$user->id)}}" method="patch">
+       <form action="{{route('profile.update',$user->id)}}" method="put">
         @csrf
             <input type="text" name="name" placeholder="{{$user->name}}" class="form-control mb-3" disabled>
             <input type="text" name="name" placeholder="{{$user->email}}" class="form-control mb-3" disabled>
@@ -33,6 +33,11 @@
                 <input type="text" name="nomortelepon" placeholder= "Nomor Telepon" class="form-control mb-3">
             @else
                 <input type="text" name="nomortelepon" placeholder= "{{$user->nomor_telepon}}" class="form-control mb-3">
+            @endif
+            @if($user->alamat == null)
+                <input type="text" name="alamat" placeholder= "Alamat" class="form-control mb-3">
+            @else
+                <input type="text" name="alamat" placeholder= "{{$user->alamat}}" class="form-control mb-3">
             @endif
             
             <button class="btn btn-primary color-primary">Ubah</button>
