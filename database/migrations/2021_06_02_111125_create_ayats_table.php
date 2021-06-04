@@ -15,6 +15,9 @@ class CreateAyatsTable extends Migration
     {
         Schema::create('ayats', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('judul');
+            $table->longtext('firman');
+            $table->string('wadah');
             $table->timestamps();
         });
     }

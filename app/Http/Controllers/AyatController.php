@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Ayat;
 
 class AyatController extends Controller
 {
@@ -13,7 +14,8 @@ class AyatController extends Controller
      */
     public function index()
     {
-        return view('ayat.index', ['active' => "Ayat"]);
+        $datas = Ayat::get();
+        return view('ayat.index', ['active' => "Ayat" , 'datas' => $datas]);
     }
 
     /**

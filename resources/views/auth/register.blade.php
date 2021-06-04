@@ -6,12 +6,21 @@
     <div class="row">&nbsp;</div>
     <div class="row">&nbsp;</div>
     <div class="row">&nbsp;</div>
+    <div class="row title m-2 text-color-primary">Halo! <br> Daftar untuk <br> memulai</div>
     <div class="row">&nbsp;</div>
-    <div class="row">&nbsp;</div>
-    <div class="row">&nbsp;</div>
-    <div class="row">&nbsp;</div>
-
-    <div class="login-form">
+    @if(Session::has('error'))
+           <span class="error mb-2"> {{ Session::get('error') }}</span>
+    @endif
+    <form action="">
+        <input type="text" name="name" placeholder="Nama" class="form-control mb-3">
+        <input type="text" name="email" placeholder="Email Address" class="form-control mb-3">
+        <input type="password" name="password" placeholder="Password" class="form-control mb-3">
+        <button class="btn color-primary btn-primary mb-3">Masuk</button>
+    </form>
+    <div class="row hero fixed-bottom">
+        <img src="{{asset('assets/img/hero.png')}}" alt="">
+    </div>
+    <!-- <div class="login-form">
         <span class="title ml-3 mt-3">Register</span>
         <hr>
         <form action="{{route('register.store')}}" method="post" class="m-3">
@@ -38,7 +47,7 @@
             </div>
             <button class="btn btn-primary mb-3">Login</button>
         </form>
-    </div>
+    </div> -->
 
 </div>
 @endsection

@@ -45,9 +45,11 @@ class LoginController extends Controller
             'password' => $request->input('password')
         );
         if(Auth::attempt($credential)){
-            return "true";
+            return redirect('/home');
         }
-        else "false";
+        else{
+            return redirect()->back()->with('error' , "Email atau Password salah");
+        }
     }
     
 

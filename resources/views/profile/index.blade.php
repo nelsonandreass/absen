@@ -16,7 +16,7 @@
                             <img class="col-12 barcode" src="{{asset('assets/img/user.png')}}" alt="">
                         </div>
                         <div class="row">
-                            <p class="col-12 greeting text-center mt-2 p-0">Nelson</p>
+                            <p class="col-12 greeting text-center mt-2 p-0">{{$name}}</p>
                         </div>
                     </div>
                     <div class="col-4"></div>
@@ -28,8 +28,10 @@
         
         <hr>
         <div class="row ml-3 mb-3 mt-2">
-           <div class="col-2 p-0 m-0"><img class="col-12 icon " src="{{asset('assets/img/user.png')}}" alt=""></div> 
-           <div class="col-6 p-0"> <a href="" class=""><span class="text-decor-none">Ubah Data Diri</span></a></div> 
+           
+            <div class="col-2 p-0 m-0"><img class="col-12 icon " src="{{asset('assets/img/user.png')}}" alt=""></div> 
+            <div class="col-6 p-0"> <a href="{{Route('profile.create')}}" class=""><span class="text-decor-none">Ubah Data Diri</span></a></div> 
+           </a>
         </div>       
         <div class="row ml-3 mb-3">
            <div class="col-2 p-0 m-0"><img class="col-12 icon " src="{{asset('assets/img/car-key.png')}}" alt=""></div> 

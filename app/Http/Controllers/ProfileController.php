@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\User;
 class ProfileController extends Controller
 {
     /**
@@ -13,7 +14,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile.index' , ['active' => "Profile"]);
+        $name = User::find(Auth::id())->pluck('name')->first();
+        return view('profile.index' , ['active' => "Profile" , 'name' => $name]);
     }
 
     /**
@@ -23,7 +25,8 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::find(Auth::id());
+        return view('profile.profile',['active' => "Profile", 'user' => $user]);
     }
 
     /**
@@ -66,9 +69,13 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $data = $request->input('nomortelepon');
+        $update = User::where('id' , $id)->update([
+            'nomor_telepon' => $data,
+        ]);
+return "true";
     }
 
     /**

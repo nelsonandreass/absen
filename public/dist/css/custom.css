@@ -1,9 +1,9 @@
 body{
     font-family: 'Poppins', sans-serif !important;
-    background-color: #EBF5F7 !important;
+    background-color: #FFFFFF !important;
 }
-.bg-primary{
-    background-color: #9eb3c2 !important;
+.bg-transparent {
+    background-color:#FFFFFF !important;
 }
 
 .card{
@@ -12,7 +12,7 @@ body{
 }
 .card-header{
     border-radius: 20px 20px 0 0!important;
-    background-color: #9eb3c2 !important;
+    background-color: #189AB4 !important;
 }
 
 .img-fluid{
@@ -27,7 +27,7 @@ body{
 }
 .text-color-primary{
     font-family: 'Poppins', sans-serif !important;
-    color: #9eb3c2 !important;
+    color:  #055C9D !important;
 }
 .profile{
     max-height: 250px !important;
@@ -37,10 +37,40 @@ body{
     color: rgb(0, 0, 0);
 }
 .title{
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 .login-form{
-    background-color: #FFFFFF;
+    color: white;
+    background-color: #4beaff;
     border-radius: 10px;
+}
+.error{
+    color: red;
+}
+.titik{
+    width: .5rem !important;
+    height: .5rem !important;
+    border-radius: 100px !important;
+    background-color: black;
+}
+.nav-active{
+    max-height: 25px !important;
+}
+.form-control{
+    border-radius: 10px !important;
+}
+.color-primary{
+    background-color: #055C9D !important;
+    
+}
+.btn-primary{
+    width: 100% !important;
+    border-radius: 10px !important;
+}
+.login-text-help{
+    font-size: .8rem !important;
+}
+.hero{
+    margin-bottom: -15px !important;
 }
