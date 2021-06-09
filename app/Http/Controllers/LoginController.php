@@ -62,14 +62,6 @@ class LoginController extends Controller
      */
     public function show(Request $request)
     {
-        $credential = array(
-            'email' => $request->input('email'),
-            'password' => $request->input('password')
-        );
-        if(Auth::attempt($credential)){
-            return "true";
-        }
-        else "false";
     }
 
     /**

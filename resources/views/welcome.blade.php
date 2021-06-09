@@ -1,1 +1,3 @@
-@extends('layout.layout')
+@extends('layout.layoutnotlogin')
+
+@include('parts.botNavTest')

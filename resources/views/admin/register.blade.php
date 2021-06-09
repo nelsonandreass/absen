@@ -6,12 +6,12 @@
     <div class="row">&nbsp;</div>
     <div class="row">&nbsp;</div>
     <div class="row">&nbsp;</div>
-    <div class="row title m-2 text-color-primary">Halo! <br> Daftar untuk <br> memulai</div>
+    <div class="row title m-2 text-color-primary">Halo! <br> Daftar menjadi <br> Admin untuk <br> memulai</div>
     <div class="row">&nbsp;</div>
     @if(Session::has('error'))
            <span class="error mb-2"> {{ Session::get('error') }}</span>
     @endif
-    <form action="{{route('register.store')}}" method="post">
+    <form action="{{route('registeradmin.store')}}" method="post">
     @csrf
         <input type="text" name="name" placeholder="Nama" class="form-control mb-3">
         <input type="text" name="email" placeholder="Email Address" class="form-control mb-3">
@@ -22,7 +22,7 @@
         <div class="row">
         <div class="col-5"></div>
             <div class="col-7 text-right login-text-help">
-                <a href="{{route('login.index')}}" class="text-decor-none">Sudah punya akun?</a>
+                <a href="{{route('loginadmin.index')}}" class="text-decor-none">Sudah punya akun?</a>
             </div>
         </div>
     </form>

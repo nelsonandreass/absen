@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\User;
-class ProfileController extends Controller
+use App\Ayat;
+
+class AdminAyatController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-    * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $name = User::find(Auth::id())->pluck('name')->first();
-        return view('profile.index' , ['active' => "Profile" , 'name' => $name]);
+        return view('admin.createfirman', ['active' => "Tulis"]);
     }
 
     /**
@@ -25,8 +24,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        $user = User::find(Auth::id());
-        return view('profile.profile',['active' => "Profile", 'user' => $user]);
+        //
     }
 
     /**
@@ -37,12 +35,11 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $id = Auth::id();
-        $data = User::find($id);
-        $data->nomor_telepon = $request->input('nomortelepon');
-        $data->alamat = $request->input('alamat');
-        $data->save();
-        return redirect()->back();
+        $data = $request->all();
+        Ayat::create($data);
+
+        return redirect()->back()->with('success' , "Berhasil ditambahkan");
+
     }
 
     /**
@@ -74,9 +71,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        
+        //
     }
 
     /**

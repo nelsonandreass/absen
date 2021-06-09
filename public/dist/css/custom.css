@@ -9,6 +9,7 @@ body{
 .card{
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, .05) 3px px;
+    
 }
 .card-header{
     border-radius: 20px 20px 0 0!important;
@@ -38,6 +39,10 @@ body{
 }
 .title{
     font-size: 1.5rem;
+    font-weight: bold;
+}
+.sub-title{
+    font-size: 1rem;
     font-weight: bold;
 }
 .login-form{
@@ -77,4 +82,7 @@ body{
 .back-button{
     border-radius: 0 15px 15px 0;
     height: 3rem;
+}
+.label-berita{
+    border-bottom: .3rem solid #055C9D;
 }

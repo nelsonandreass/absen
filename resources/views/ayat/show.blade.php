@@ -8,8 +8,5 @@
                 <hr>
                 {{$data->firman}}
         </div>  
-        <form action="{{}}">
-            <button>back</button>
-        </form>
         
 </div>

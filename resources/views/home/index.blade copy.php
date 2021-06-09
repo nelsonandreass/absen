@@ -3,29 +3,14 @@
 @section('content')
 
     <div class="container" style="display:none;">   
+        <div class="row">&nbsp;</div>
         <div class="row">
-            <div class="col-11 text-center card ml-3 mt-3 mr-3 main-page" style="">
-                <span class="title mt-3">Hi, <span class="text-color-primary">{{$name}}</span></span>
-                <div class="row">&nbsp;</div>
-                <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-4 m-0">
-                        <img class="barcode" src="{{asset('/assets/img/qr.png')}}" alt="">
-                    </div>
-                    <div class="col-4"></div>
-                </div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-
-
+            <div class="col-12">
+                <span class="title m-0">Hi, <span class="text-color-primary">{{$name}}</span></span>
             </div>
         </div>
        
-       
+        @include('parts.carousel')
         <div class="row mt-3 ml-3">
             <h2 class="sub-title mt-3">Berita</h2>
         </div>

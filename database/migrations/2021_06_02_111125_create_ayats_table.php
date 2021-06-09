@@ -17,7 +17,7 @@ class CreateAyatsTable extends Migration
             $table->bigIncrements('id');
             $table->string('judul');
             $table->longtext('firman');
-            $table->string('wadah');
+            $table->string('wadah')->nullable();
             $table->timestamps();
         });
     }

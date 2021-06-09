@@ -25,7 +25,7 @@
         </div>
         
 
-       <form action="{{route('profile.update',$user->id)}}" method="put">
+       <form action="{{route('profile.store')}}" method="post">
         @csrf
             <input type="text" name="name" placeholder="{{$user->name}}" class="form-control mb-3" disabled>
             <input type="text" name="name" placeholder="{{$user->email}}" class="form-control mb-3" disabled>

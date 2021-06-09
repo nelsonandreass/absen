@@ -38,15 +38,17 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $tempPass = $data['password'];
         $data['password'] = Hash::make( $data['password']);
-        $user = User::create($data);
-        $credential = array(
-            'name' => $data['email'],
-            'password' => $data['repassword']
-        );
-        if(Auth::attempt($credential)){
-            return view('home.index' ,['active' => "Home"]);
+        if($tempPass != $data['repassword']){
+            return redirect()->back()->with('error', 'Password tidak cocok');
         }
+        else{
+            $user = User::create($data);
+            Auth::attempt(['email' => $data['email'] , 'password' => $tempPass]);
+            return redirect('/home');
+        }
+        
     }
 
     /**
