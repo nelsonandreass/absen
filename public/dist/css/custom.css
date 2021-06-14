@@ -1,14 +1,17 @@
 body{
     font-family: 'Poppins', sans-serif !important;
-    background-color: #FFFFFF !important;
+    background-color: rgb(250, 250, 250) !important;
+  
 }
 .bg-transparent {
-    background-color:#FFFFFF !important;
+    background-color: rgb(250, 250, 250) !important;
 }
 
 .card{
     border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, .05) 3px px;
+    border: rgb(250, 250, 250) solid 1px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 4px 5px rgba(197, 197, 197, 0.2);
     
 }
 .card-header{
@@ -85,4 +88,25 @@ body{
 }
 .label-berita{
     border-bottom: .3rem solid #055C9D;
+}
+.counter{
+    background-color: #E3E8E9;
+    margin-top: -4rem;
+    height: 4.5rem !important;
+}
+.border-right{
+    height: 100%  !important;
+}
+.main-landing{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+.img-landing{
+    padding: 0 !important;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 200px     !important;
+    margin: -20px 0px 0px 0px ;
 }

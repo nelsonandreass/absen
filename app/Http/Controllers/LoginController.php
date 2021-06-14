@@ -30,7 +30,7 @@ class LoginController extends Controller
     public function create()
     {
         Auth::logout();
-        return redirect('/login');
+        return view('auth.login');
     }
 
     /**

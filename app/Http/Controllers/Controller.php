@@ -11,6 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function index(){
-        return view('welcome',['active' => "Ayat"]);
+       return view('landing');
     }
 }

@@ -13,7 +13,7 @@
                     <div class="col-4"></div>
                     <div class="col-4 2-100">
                         <div class="row">
-                            <img class="col-12 barcode" src="{{asset('assets/img/user-black.png')}}" alt="">
+                            <img class="col-12 barcode" src="{{asset('/assets/img/qr.png')}}" alt="">
                         </div>
                         <div class="row">
                             <p class="col-12 greeting text-center mt-2 p-0">{{$name}}</p>

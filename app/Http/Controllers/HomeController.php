@@ -15,6 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         $name = User::find(Auth::id())->pluck('name')->first();
         return view('home.index' ,['active' => "Home" ,'name' => $name]);
     }

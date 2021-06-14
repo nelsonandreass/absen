@@ -23,10 +23,30 @@
     </head>
     <body>
         
-        @yield('content')
+    @yield('content')
+        @if(Auth::check() == false)
+            <div class="container fixed-top">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">GPDI</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-
-        @if(Auth::user()->role == 'user')
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <!-- <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li> -->
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                        <a href="{{route('login.index')}}" class="btn btn-primary color-primary m-1">Login</a>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        
+        
+        @elseif(Auth::user()->role == 'user')
         <div class="d-block d-md-none">
             @include('parts.bottomNav')
         </div>
@@ -35,7 +55,7 @@
             @include('parts.bottomNavAdmin')
         </div>
         @else
-            <div></div>
+            
         @endif
         <script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('dist/js/bootstrap.bundle.min.js')}}"></script>
