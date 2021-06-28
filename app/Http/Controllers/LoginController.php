@@ -30,7 +30,7 @@ class LoginController extends Controller
     public function create()
     {
         Auth::logout();
-        return view('auth.login');
+        return redirect('/login');
     }
 
     /**
@@ -46,6 +46,9 @@ class LoginController extends Controller
             'password' => $request->input('password')
         );
         if(Auth::attempt($credential)){
+            if(Auth::user()->role == "superadmin"){
+                return redirect('/super');
+            }
             return redirect('/home');
         }
         else{

@@ -14,7 +14,7 @@ class AyatController extends Controller
      */
     public function index()
     {
-        $datas = Ayat::orderByDesc('created_at')->take('8')->get();
+        $datas = Ayat::orderByDesc('created_at')->take('10')->get();
         return view('ayat.index', ['active' => "Ayat" , 'datas' => $datas]);
     }
 

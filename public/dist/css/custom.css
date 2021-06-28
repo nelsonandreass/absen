@@ -1,6 +1,6 @@
 body{
     font-family: 'Poppins', sans-serif !important;
-    background-color: rgb(250, 250, 250) !important;
+    background-color: #f8f9fa !important;
   
 }
 .bg-transparent {
@@ -12,6 +12,7 @@ body{
     border: rgb(250, 250, 250) solid 1px;
     background-color: rgb(255, 255, 255);
     box-shadow: 4px 5px rgba(197, 197, 197, 0.2);
+ 
     
 }
 .card-header{
@@ -23,7 +24,8 @@ body{
     max-height: 20px !important;
 }
 .barcode{
-    max-height: 100px !important;
+    width: 100%;
+    max-height: 120px !important;
 }
 .icon{
     max-height: 30px !important;
@@ -109,4 +111,10 @@ body{
     background-repeat: no-repeat;
     background-size: 200px     !important;
     margin: -20px 0px 0px 0px ;
+}
+.no-absen{
+    height: 20rem !important;
+}
+.row-blank{
+    height: 5rem  !important;
 }

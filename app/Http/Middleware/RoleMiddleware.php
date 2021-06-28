@@ -20,6 +20,9 @@ class RoleMiddleware
         if(Auth::check() && Auth::user()->role == "admin"){
             return $next($request);
         }
+        else if(Auth::check() && Auth::user()->role == "superadmin"){
+            return $next($request);
+        }
         else{
             return redirect('/login');
         }

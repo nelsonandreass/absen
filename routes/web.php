@@ -12,8 +12,7 @@
 */
 
 Route::get('/', 'Controller@index');
-
-Route::group(['middleware' => 'authweb'],function(){
+Route::group(['middleware' => ['authweb','auth']],function(){
     Route::resource('/home' , 'HomeController');
     Route::resource('/berita' , 'BeritaController');
     Route::resource('/ayat' , 'AyatController');
@@ -21,13 +20,25 @@ Route::group(['middleware' => 'authweb'],function(){
 });
 
 Route::group(['middleware' => 'role'],function(){
+    Route::get('/super' , 'SuperAdminController@index');
+    Route::get('/ibadah' , 'SuperAdminController@ibadah');
+    Route::post('/buatibadah' , 'SuperAdminController@buatIbadah');
+    Route::get('/absen' , 'SuperAdminController@absen');
+    Route::post('/absenprocess' , 'SuperAdminController@absenProcess');
+    
+    Route::get('/getabsen' , 'SuperAdminController@getAbsen');
+
+    Route::get('/listjemaat' , 'SuperAdminController@listjemaat');
+
+});
+Route::group(['middleware' => 'role'],function(){
     Route::resource('/tulisfirman' , 'AdminAyatController');
 });
 
-Route::group(['middleware' => 'checklogin'] , function(){
     Route::resource('/loginadmin' , 'AdminLoginController');
     Route::resource('/registeradmin' , 'AdminRegisterController');
     Route::resource('/login' ,'LoginController');
     Route::resource('/register' ,'RegisterController');
-});
+
+
 

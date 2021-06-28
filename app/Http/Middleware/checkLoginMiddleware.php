@@ -17,11 +17,13 @@ class checkLoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()){
+        
+        if(Auth::check() == true){
+            
             return redirect('/home');
         }
         else{
-            return $next($request);
+            return redirect('/login');
         }
        
     }

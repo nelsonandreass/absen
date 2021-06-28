@@ -4,13 +4,13 @@
 
     <div class="container" style="display:none;">   
         <div class="row">
-            <div class="col-11 text-center card ml-3 mt-3 mr-3 main-page" style="">
-                <span class="title mt-3">Hi, <span class="text-color-primary">{{$name}}</span></span>
+            <div class="col-11  card ml-3 mt-3 mr-3 main-page" style="">
+                <span class="title mt-3 text-center">Hi, <span class="text-color-primary">{{$name}}</span></span>
                 <div class="row">&nbsp;</div>
                 <div class="row">
                     <div class="col-4"></div>
-                    <div class="col-4 m-0">
-                        <img class="barcode" src="{{asset('/assets/img/qr.png')}}" alt="">
+                    <div class="col-4 p-0">
+                        <img class="barcode " src="{{asset('/assets/img/qr.png')}}" alt="">
                     </div>
                     <div class="col-4"></div>
                 </div>
@@ -40,7 +40,7 @@
                 <label for="youth">Youth</label>
             </div>
         </div>
-        <div id="label-active" class="row col-3 ml-3 mr-3 label-berita"></div>
+        <div id="label-active" class="row col-3 label-berita"></div>
         <div class="row m-3">
             <div id="content-umum" class="col-12 p-0">
                 UMUM <br>
@@ -55,6 +55,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, ullam. Possimus excepturi nisi quod quidem aspernatur fugiat aliquam pariatur eaque porro fugit quae dicta vero atque minima, et deserunt. Placeat?
             </div>
         </div>
+        <div class="row-blank"></div>
     </div>
     
    <!-- <div id="test-container">
@@ -63,13 +64,14 @@
    <script> 
         $("#content-bic").hide();
         $("#content-youth").hide();
-
+        
         $(document).ready(function(){
             $(".container").show(400);
-            
+            var x= $("#umum").position();
+            $("#label-active").css({left: x.left+15});
             $("#umum").click(function(){
                 var x= $("#umum").position();
-                $("#label-active").animate({left: x.left-30});
+                $("#label-active").animate({left: x.left});
                 $("#content-umum").show(1000);
                 $("#content-bic").hide(1000);
                 $("#content-youth").hide(1000);
@@ -77,14 +79,14 @@
             });
             $("#bic").click(function(){
                 var x= $("#bic").position();
-                $("#label-active").animate({left: x.left-30});
+                $("#label-active").animate({left: x.left});
                 $("#content-umum").hide(1000);
                 $("#content-bic").show(1000);
                 $("#content-youth").hide(1000);
             });
             $("#youth").click(function(){
                 var x= $("#youth").position();
-                $("#label-active").animate({left: x.left-30});
+                $("#label-active").animate({left: x.left});
                 $("#content-umum").hide(1000);
                 $("#content-bic").hide(1000);
                 $("#content-youth").show(1000);

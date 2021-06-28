@@ -12,16 +12,15 @@
             </div>
         </a>  
     @endforeach
+   <div class="row-blank">
    
+   </div>
 </div>
 <script>
-//  $(".container").show(400);
 
     $(document).ready(function(){
-        
         var id = [];
         $("a").each(function(){ id.push(this.id); });
-        console.log(id.length-3)
         for(i = 0 ; i <= id.length-3 ; i++){
             $("#"+id[i]).show((i+1)*300);
         }
