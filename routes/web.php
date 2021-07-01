@@ -30,6 +30,10 @@ Route::group(['middleware' => 'role'],function(){
 
     Route::get('/listjemaat' , 'SuperAdminController@listjemaat');
 
+    Route::get('/upload' , 'SuperAdminController@upload');
+    Route::post('/uploadprocess' , 'SuperAdminController@uploadprocess');
+
+
 });
 Route::group(['middleware' => 'role'],function(){
     Route::resource('/tulisfirman' , 'AdminAyatController');
