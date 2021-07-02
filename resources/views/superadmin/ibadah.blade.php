@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-4"></div>
                             <div class="col-4">
-                                <img class="col-12 no-absen" src="{{asset('/assets/img/user-black.png')}}" alt="">
+                                <img class="col-12 no-absen" src="{{asset('/assets/img/user-black.png')}}" id="foto-jemaat" alt="">
                             </div>
                             <div class="col-4"></div>
                             
@@ -62,7 +62,10 @@
        
 
         $(document).ready(function(){
-          
+            setInterval(() => {
+                var foto = 'http://localhost:8000/assets/img/user-black.png';
+                $("#foto-jemaat").attr("src",foto);
+            }, 5000);
 
             $("#btn").click(function(e){
                 e.preventDefault();
@@ -73,10 +76,10 @@
             $("#userid").on('input',function(e){
                 e.preventDefault();
                 var userid = $("#userid").val();
-                if(userid.length == 5){
+                if(userid.length == 7){
                     var http = new XMLHttpRequest();
                     var url = '/absenprocess';
-                    var params = 'ibadah_id=1&user_id=1&user_name='+userid+'&jenis='+$("#jenis").val()+'&_token={{csrf_token()}}';
+                    var params = 'ibadah_id=1&user_id='+userid+'&jenis='+$("#jenis").val()+'&_token={{csrf_token()}}';
                     http.open('POST', url, true);
                     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -84,7 +87,10 @@
                         if(http.readyState == 4 && http.status == 200) {
                             $("#userid").val("");
                             $("#userid").focus();
-
+                            var data= JSON.parse(http.responseText);
+                            var foto = 'http://localhost:8000/assets/img/'+data.foto;
+                            $("#foto-jemaat").attr("src",foto);
+                            alert(data.name);
                         }
                     }
                     http.send(params);

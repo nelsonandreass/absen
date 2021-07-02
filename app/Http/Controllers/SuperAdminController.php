@@ -49,8 +49,41 @@ class SuperAdminController extends Controller
         $data->jenis = $jenis;
         $data->tanggal = $date;
         $data->save();
+        $user = Absen::with(['users'])->where('user_id',$user_id)->first();
+
+        foreach($user->users as $key => $userdata){
+            $response = array(
+                "name" => $userdata->name,
+                "foto" => $userdata->foto,
+                "greet" => "Selamat Beribadah"
+            );
+        }
+
+        // $response = array(
+        //     "name" => "Nelson",
+        //     "greet" => "Selamat Beribadah"
+        // );
+        return json_encode($response);
+    }
+
+    public function test(){
+        return view('superadmin.kartu');
+    }
+
+    public function testprocess(Request $request){
+        $kartu = $request->input('kartu');
+
+        $absen = Absen::with('users')->where('user_id',$kartu)->first();
+        foreach($absen->users as $key =>  $data){
+            $response = array(
+                "name" => $data->name,
+                "foto" =>$data->foto,
+                "greet" => "Selamat Beribadah"
+            );
+        }
         
-        return "Selamat Beribadah";
+        echo json_encode($response);
+
     }
     public function listjemaat(){
         $users = User::where('role' , 'user')->get();
@@ -71,6 +104,7 @@ class SuperAdminController extends Controller
         // $save = Storage::putFileAs('public',$excel, $name);
         $rows = Excel::toArray(new UsersImport,$excel);
         for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
+            dd($rows[0][0]);
             if(!is_null($rows[0][$i][6])){
                 $ttl = explode("," , $rows[0][$i][6]);
             }
@@ -91,6 +125,20 @@ class SuperAdminController extends Controller
         }
        
         // dd($rows[0][1]);
+    }
+
+    public function uploadfoto(){
+        return view('superadmin.uploadfoto');
+    }
+    public function uploadfotoprocess(Request $request){
+        $foto = $request->file('foto');
+        $name = $foto->getClientOriginalName();
+        $save = Storage::putFileAs('public',$foto, $name);
+
+        $data = User::where('email' , 'nelson@gmail.com')->update([
+            'foto' => $name
+        ]);
+
     }
 }
 

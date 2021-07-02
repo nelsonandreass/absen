@@ -36,4 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function absen(){
+        return $this->belongsTo(Absen::class,'kartu','user_id');
+    }
 }

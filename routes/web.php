@@ -33,6 +33,13 @@ Route::group(['middleware' => 'role'],function(){
     Route::get('/upload' , 'SuperAdminController@upload');
     Route::post('/uploadprocess' , 'SuperAdminController@uploadprocess');
 
+    
+    Route::get('/uploadfoto' , 'SuperAdminController@uploadfoto');
+    Route::post('/uploadfotoprocess' , 'SuperAdminController@uploadfotoprocess');
+
+
+    Route::get('/test' , 'SuperAdminController@test');
+    Route::post('/testprocess' , 'SuperAdminController@testprocess');
 
 });
 Route::group(['middleware' => 'role'],function(){

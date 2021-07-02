@@ -17,7 +17,7 @@ class CreateAbsensTable extends Migration
             $table->bigIncrements('id');
             $table->integer('ibadah_id');
             $table->integer('user_id');
-            $table->string('user_name');
+            $table->string('user_name')->nullable();
             $table->string('jenis');
             $table->string('tanggal');
             $table->timestamps();
