@@ -13,17 +13,19 @@
                     <th>Action</th>
                 </thead>
                 <tbody>
+                    <?php $i = 1?>
                     @foreach($users as $user)
                         <tr>
-                            <td>{{$user->id}}</td>
+                            <td>{{$i}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->nomor_telepon}}</td>
                             <td>{{$user->no_keluarga}}</td>
                             <td>{{$user->foto}}</td>
                             <td>
-                                <a href="" class="btn btn-success">Edit</a>
+                                <a href="{{url('/showjemaat', $user->id)}}" class="btn btn-primary">Edit</a>
                             </td>
                         </tr>
+                        <?php $i++?>
                     @endforeach
                 </tbody>
            </table> 

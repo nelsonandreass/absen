@@ -18,6 +18,7 @@
     <!-- Custom CSS -->
     <!-- <link href="{{asset('superadmin/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet"> -->
     <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link href="{{asset('superadmin/dist/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('dist/css/custom.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -28,6 +29,12 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<style>
+    body{
+        font-family: 'Poppins', sans-serif !important;
+    }
+
+</style>
 </head>
 
 <body>

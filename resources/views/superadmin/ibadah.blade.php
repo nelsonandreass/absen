@@ -7,11 +7,11 @@
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
+                <!-- <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
+                <div class="row">&nbsp;</div> -->
                    <form action="{{url('/buatibadah')}}" class="col-5" method="POST" id="option">
                         @csrf
                         <label for="" class="text-center">Jenis Ibadah</label>
@@ -25,6 +25,11 @@
                    </form>
 
                    <center id="absen" style="display:none;">
+                        <div class="row">
+                            <center>
+                                <h2 id="greeting"></h2>
+                            </center>
+                        </div>
                         <div class="row">
                             <div class="col-4"></div>
                             <div class="col-4">
@@ -90,7 +95,8 @@
                             var data= JSON.parse(http.responseText);
                             var foto = 'http://localhost:8000/assets/img/'+data.foto;
                             $("#foto-jemaat").attr("src",foto);
-                            alert(data.name);
+                            $("#greeting").val("Selamat Beribadah " + data.name);
+                            
                         }
                     }
                     http.send(params);

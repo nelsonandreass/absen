@@ -86,8 +86,29 @@ class SuperAdminController extends Controller
 
     }
     public function listjemaat(){
-        $users = User::where('role' , 'user')->get();
+        $users = User::where('role' , 'user')->orderBy('name','asc')->get();
         return view('superadmin.listjemaat' , ['users' => $users]);
+    }
+
+    public function showjemaat($id){
+        $data = User::find($id);
+
+        return view('superadmin.showjemaat' , ['datas' => $data]);
+    }
+
+    public function updatejemaat(Request $request){
+        $id = $request->input('id');
+        $email = $request->input('email');
+        $telepon = $request->input('telepon');
+        $alamat = $request->input('alamat');
+        $nokeluarga = $request->input('nokeluarga');
+        $user = User::where('id', $id)->update([
+            'email' => $email,
+            'nomor_telepon' => $telepon,
+            'alamat' => $alamat,
+            'no_keluarga' => $nokeluarga
+        ]);
+        return redirect('/listjemaat');
     }
 
     public function getAbsen(){

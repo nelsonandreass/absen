@@ -29,6 +29,8 @@ Route::group(['middleware' => 'role'],function(){
     Route::get('/getabsen' , 'SuperAdminController@getAbsen');
 
     Route::get('/listjemaat' , 'SuperAdminController@listjemaat');
+    Route::get('/showjemaat/{id}' , 'SuperAdminController@showjemaat' );
+    Route::post('/update/jemaat' , 'SuperAdminController@updatejemaat');
 
     Route::get('/upload' , 'SuperAdminController@upload');
     Route::post('/uploadprocess' , 'SuperAdminController@uploadprocess');
