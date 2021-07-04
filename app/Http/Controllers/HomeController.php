@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Berita;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,11 @@ class HomeController extends Controller
     {
         
         $name = User::find(Auth::id())->pluck('name')->first();
-        return view('home.index' ,['active' => "Home" ,'name' => $name]);
+        $beritaumum = Berita::where('wadah',"umum")->first();
+        $beritabic = Berita::where('wadah',"bic")->first();
+        $beritayouth = Berita::where('wadah',"youth")->first();
+
+        return view('home.index' ,['active' => "Home" ,'name' => $name , 'beritaumum' => $beritaumum , 'beritabic' => $beritabic , 'beritayouth' => $beritayouth]);
     }
 
     /**

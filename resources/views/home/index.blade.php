@@ -43,16 +43,16 @@
         <div id="label-active" class="row col-3 label-berita"></div>
         <div class="row m-3">
             <div id="content-umum" class="col-12 p-0">
-                UMUM <br>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam rerum earum veritatis blanditiis ipsum delectus porro maxime assumenda quas cum, alias quisquam ex magnam, quam sed praesentium fuga sit odit.
+                {{$beritaumum->judul}} <br>
+                {{$beritaumum->berita}}
             </div>
             <div id="content-bic" class="col-12 p-0" style="display:none;">
-                BIC <br>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium, consequuntur incidunt. Exercitationem fugit corrupti, sapiente quas vero recusandae vitae illum, cupiditate doloribus omnis at expedita assumenda sed, perferendis fuga officiis?
+                {{$beritabic->judul}} <br>
+                {{$beritabic->berita}}
             </div>
             <div id="content-youth" class="col-12 p-0" style="display:none;">
-                YOUTH<br>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, ullam. Possimus excepturi nisi quod quidem aspernatur fugiat aliquam pariatur eaque porro fugit quae dicta vero atque minima, et deserunt. Placeat?
+                {{$beritayouth->judul}} <br>
+                {{$beritayouth->berita}}
             </div>
         </div>
         <div class="row-blank"></div>

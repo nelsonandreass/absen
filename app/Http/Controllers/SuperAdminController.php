@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Absen;
 Use App\Ibadah;
+Use App\Berita;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -66,25 +67,7 @@ class SuperAdminController extends Controller
         return json_encode($response);
     }
 
-    public function test(){
-        return view('superadmin.kartu');
-    }
-
-    public function testprocess(Request $request){
-        $kartu = $request->input('kartu');
-
-        $absen = Absen::with('users')->where('user_id',$kartu)->first();
-        foreach($absen->users as $key =>  $data){
-            $response = array(
-                "name" => $data->name,
-                "foto" =>$data->foto,
-                "greet" => "Selamat Beribadah"
-            );
-        }
-        
-        echo json_encode($response);
-
-    }
+    //jemaat
     public function listjemaat(){
         $users = User::where('role' , 'user')->orderBy('name','asc')->get();
         return view('superadmin.listjemaat' , ['users' => $users]);
@@ -110,7 +93,72 @@ class SuperAdminController extends Controller
         ]);
         return redirect('/listjemaat');
     }
+    //end of jemaat
 
+    //berita
+    public function berita(){
+        $datas = Berita::get();
+        return view('superadmin.berita' , ['datas' => $datas]);
+    }
+
+    public function createBerita(){
+        return view('superadmin.createberita');
+    }
+
+    public function createBeritaProcess(Request $request){
+        $judul = $request->input('judul');
+        $berita = $request->input('berita');
+        $wadah = $request->input('wadah');
+
+        $data = new Berita();
+        $data->judul = $judul;
+        $data->berita = $berita;
+        $data->wadah = $wadah;
+        $data->save();
+
+        return redirect('/berita');
+    }
+
+    public function updateBerita($id){
+        return view('superadmin.updateberita');
+    }
+
+    public function updateBeritaProcess(Request $request){
+        $id = $request->input('id');
+        $judul = $request->input('judul');
+        $berita = $request->input('berita');
+        $wadah = $request->input('wadah');
+        $data = Berita::where('id',$id)->update([
+            'judul' => $judul,
+            'berita' => $berita,
+            'wadah' => $wadah
+        ]);
+        return redirect('/berita');
+    }
+    //end of berita
+
+
+
+    public function test(){
+        return view('superadmin.kartu');
+    }
+
+    public function testprocess(Request $request){
+        $kartu = $request->input('kartu');
+
+        $absen = Absen::with('users')->where('user_id',$kartu)->first();
+        foreach($absen->users as $key =>  $data){
+            $response = array(
+                "name" => $data->name,
+                "foto" =>$data->foto,
+                "greet" => "Selamat Beribadah"
+            );
+        }
+        
+        echo json_encode($response);
+
+    }
+    
     public function getAbsen(){
         $datas = DB::table('absens')->select('tanggal',DB::raw('count(id) as total'))->orderBy('tanggal','asc')->groupBy('tanggal')->get();
         dd($datas);
