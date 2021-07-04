@@ -28,7 +28,7 @@
                                 <td>{{$data->berita}}</td>
                                 <td>{{$data->wadah}}</td>
                                 <td>
-                                    <a href="{{url('/updateberita',$data->id)}}" class="btn btn-success">Lihat</a>
+                                    <a href="{{url('/updateberita',$data->id)}}" class="btn btn-success">Edit</a>
                                 </td>
                             </tr>
                             <?php $i++?>
