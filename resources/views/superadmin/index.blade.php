@@ -60,8 +60,7 @@
                                 <div class="feed-widget">
                                     <ul class="list-style-none feed-body m-0 p-b-20">
                                         <li class="feed-item">
-                                            <div class="feed-icon bg-info"><i class="far fa-bell"></i></div> You have 4
-                                            pending tasks. <span class="ms-auto font-12 text-muted">Just Now</span>
+                                            <div class="feed-icon bg-info"><i class="mdi mdi-face-profile"></i></div> Jemaat<span class="ms-auto font-12 text-muted"></span>
                                         </li>
                                         <li class="feed-item">
                                             <div class="feed-icon bg-success"><i class="ti-server"></i></div> Server #1

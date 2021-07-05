@@ -8,6 +8,7 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>No Telepon</th>
+                    <th>Alamat</th>
                     <th>No Keluarga</th>
                     <th>Foto</th>
                     <th>Action</th>
@@ -19,6 +20,7 @@
                             <td>{{$i}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->nomor_telepon}}</td>
+                            <td>{{$user->alamat}}</td>
                             <td>{{$user->no_keluarga}}</td>
                             <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
                             <td>

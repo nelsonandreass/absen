@@ -12,6 +12,8 @@ Use App\Berita;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Concerns\WithDrawings;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
 class SuperAdminController extends Controller
 {
@@ -162,7 +164,6 @@ class SuperAdminController extends Controller
     //end of berita
 
 
-
     public function test(){
         $absen = Absen::with(['users'])->get();
         return view('superadmin.kartu');
@@ -198,7 +199,6 @@ class SuperAdminController extends Controller
         // $save = Storage::putFileAs('public',$excel, $name);
         $rows = Excel::toArray(new UsersImport,$excel);
         for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
-            dd($rows[0][0]);
             if(!is_null($rows[0][$i][6])){
                 $ttl = explode("," , $rows[0][$i][6]);
             }
@@ -209,12 +209,12 @@ class SuperAdminController extends Controller
             $user->password = $rows[0][$i][0];
             $user->jenis_kelamin = $rows[0][$i][4];
             $user->status_pernikahan = $rows[0][$i][5];
+            $user->alamat = $rows[0][$i][7];
             if(!is_null($rows[0][$i][6])){
                 $user->tanggal_lahir = $ttl[1];
                 $user->tempat_lahir = $ttl[0];
             }
-            $user->nomor_telepon = $rows[0][$i][1];
-            $user->alamat = $rows[0][$i][1];
+            $user->nomor_telepon = $rows[0][$i][8];
             $user->save();
         }
        

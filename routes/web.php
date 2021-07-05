@@ -12,6 +12,12 @@
 */
 
 Route::get('/', 'Controller@index');
+Route::resource('/loginadmin' , 'AdminLoginController');
+Route::resource('/registeradmin' , 'AdminRegisterController');
+Route::resource('/login' ,'LoginController');
+Route::resource('/register' ,'RegisterController');
+
+
 Route::group(['middleware' => ['authweb','auth']],function(){
     Route::resource('/home' , 'HomeController');
     Route::resource('/berita' , 'BeritaController');
@@ -59,11 +65,3 @@ Route::group(['middleware' => 'role'],function(){
 Route::group(['middleware' => 'role'],function(){
     Route::resource('/tulisfirman' , 'AdminAyatController');
 });
-
-    Route::resource('/loginadmin' , 'AdminLoginController');
-    Route::resource('/registeradmin' , 'AdminRegisterController');
-    Route::resource('/login' ,'LoginController');
-    Route::resource('/register' ,'RegisterController');
-
-
-

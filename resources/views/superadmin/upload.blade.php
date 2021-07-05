@@ -7,7 +7,7 @@
             <center>
                     <form action="{{url('/uploadprocess')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                        <input type="file" name="excel" class="form-control">
+                        <input type="file" name="excel" class="form-control" >
                         <button>submit</button>
                     </form>
             </center>
