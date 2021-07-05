@@ -43,16 +43,16 @@
         <div id="label-active" class="row col-3 label-berita"></div>
         <div class="row m-3">
             <div id="content-umum" class="col-12 p-0">
-                {{$beritaumum->judul}} <br>
-                {{$beritaumum->berita}}
+                {{$beritaumum->judul ?? ""}} <br>
+                {{$beritaumum->berita ?? ""}}
             </div>
             <div id="content-bic" class="col-12 p-0" style="display:none;">
-                {{$beritabic->judul}} <br>
-                {{$beritabic->berita}}
+                {{$beritabic->judul ?? ""}} <br>
+                {{$beritabic->berita ?? ""}}
             </div>
             <div id="content-youth" class="col-12 p-0" style="display:none;">
-                {{$beritayouth->judul}} <br>
-                {{$beritayouth->berita}}
+                {{$beritayouth->judul ?? ""}} <br>
+                {{$beritayouth->berita ?? ""}}
             </div>
         </div>
         <div class="row-blank"></div>

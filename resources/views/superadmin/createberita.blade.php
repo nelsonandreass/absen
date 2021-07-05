@@ -17,7 +17,7 @@
                     <option value="youth" class="form-control">Youth</option>
                 </select> 
                 <center>
-                    <div class="col-4">
+                    <div class="col-4 mt-3">
                         <button class="btn btn-primary">Simpan</button>
                     </div>
                 </center>

@@ -18,24 +18,11 @@ class SuperAdminController extends Controller
     public function index(){
         return view('superadmin.index');
     }
+    //absen
     public function ibadah(){
-        
-        
         return view('superadmin.ibadah');
     }
-    public function buatIbadah(Request $request){
-        $jenis = $request->input('jenis');
-        $data = new Ibadah();
-        $data->jenis_ibadah = $jenis;
-        $data->save();
-        return redirect('/absen')->with('jenis' , $jenis);
-    }
-    public function absen(){
 
-        $jenis = session()->get('jenis');
-        return view('superadmin.absen' , ['jenis' => $jenis]);
-    }
-    
     public function absenProcess(Request $request){
         $ibadah_id = $request->input('ibadah_id');
         $user_id = $request->input('user_id');
@@ -67,6 +54,23 @@ class SuperAdminController extends Controller
         return json_encode($response);
     }
 
+        //tidak di pakai
+        public function buatIbadah(Request $request){
+            $jenis = $request->input('jenis');
+            $data = new Ibadah();
+            $data->jenis_ibadah = $jenis;
+            $data->save();
+            return redirect('/absen')->with('jenis' , $jenis);
+        }
+
+        public function absen(){
+
+            $jenis = session()->get('jenis');
+            return view('superadmin.absen' , ['jenis' => $jenis]);
+        }
+
+    //end of absen
+
     //jemaat
     public function listjemaat(){
         $users = User::where('role' , 'user')->orderBy('name','asc')->get();
@@ -85,12 +89,31 @@ class SuperAdminController extends Controller
         $telepon = $request->input('telepon');
         $alamat = $request->input('alamat');
         $nokeluarga = $request->input('nokeluarga');
-        $user = User::where('id', $id)->update([
-            'email' => $email,
-            'nomor_telepon' => $telepon,
-            'alamat' => $alamat,
-            'no_keluarga' => $nokeluarga
-        ]);
+        $foto = $request->file('foto');
+       
+
+        if(!is_null($foto)){
+            $namafoto = $foto->getClientOriginalName();
+            $save = Storage::putFileAs('public',$foto, $namafoto);
+            $array = array(
+                'email' => $email,
+                'nomor_telepon' => $telepon,
+                'alamat' => $alamat,
+                'no_keluarga' => $nokeluarga,
+                'foto' => $namafoto
+            );
+        }
+        else{
+            $array = array(
+                'email' => $email,
+                'nomor_telepon' => $telepon,
+                'alamat' => $alamat,
+                'no_keluarga' => $nokeluarga,
+               
+            );
+        }
+        
+        $user = User::where('id', $id)->update($array);
         return redirect('/listjemaat');
     }
     //end of jemaat
@@ -120,7 +143,8 @@ class SuperAdminController extends Controller
     }
 
     public function updateBerita($id){
-        return view('superadmin.updateberita');
+        $data = Berita::where('id', $id)->first();
+        return view('superadmin.updateberita', ['berita' => $data]);
     }
 
     public function updateBeritaProcess(Request $request){
@@ -140,6 +164,7 @@ class SuperAdminController extends Controller
 
 
     public function test(){
+        $absen = Absen::with(['users'])->get();
         return view('superadmin.kartu');
     }
 

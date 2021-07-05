@@ -25,8 +25,8 @@ Route::group(['middleware' => 'role'],function(){
     
     //absen
     Route::get('/ibadah' , 'SuperAdminController@ibadah');
-    Route::post('/buatibadah' , 'SuperAdminController@buatIbadah');
-    Route::get('/absen' , 'SuperAdminController@absen');
+    // Route::post('/buatibadah' , 'SuperAdminController@buatIbadah');
+    // Route::get('/absen' , 'SuperAdminController@absen');
     Route::post('/absenprocess' , 'SuperAdminController@absenProcess');
     Route::get('/getabsen' , 'SuperAdminController@getAbsen');
 

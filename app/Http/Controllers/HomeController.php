@@ -18,10 +18,18 @@ class HomeController extends Controller
     {
         
         $name = User::find(Auth::id())->pluck('name')->first();
-        $beritaumum = Berita::where('wadah',"umum")->first();
-        $beritabic = Berita::where('wadah',"bic")->first();
-        $beritayouth = Berita::where('wadah',"youth")->first();
-
+        $beritaumum = Berita::where('wadah',"umum")->orderBy('created_at','desc')->first();
+        $beritabic = Berita::where('wadah',"bic")->orderBy('created_at','desc')->first();
+        $beritayouth = Berita::where('wadah',"youth")->orderBy('created_at','desc')->first();
+        if(is_null($beritaumum)){
+            $beritaumum =  "";
+        }
+        if(is_null($beritabic)){
+            $beritabic = "";
+        }
+        if(is_null($beritayouth)){
+            $beritayouth = "";
+        }
         return view('home.index' ,['active' => "Home" ,'name' => $name , 'beritaumum' => $beritaumum , 'beritabic' => $beritabic , 'beritayouth' => $beritayouth]);
     }
 

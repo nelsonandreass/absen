@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-wrapper">
-            <div class="page-breadcrumb">
+            <!-- <div class="page-breadcrumb">
                 <div class="row align-items-center">
                     <div class="col-5">
                         <h4 class="page-title">Dashboard</h4>
@@ -19,7 +19,7 @@
                        
                     </div>
                 </div>
-            </div>
+            </div> -->
             
             <div class="container-fluid">
                 <!-- ============================================================== -->
