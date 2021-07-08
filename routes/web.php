@@ -14,11 +14,16 @@
 Route::get('/', 'Controller@index');
 Route::resource('/loginadmin' , 'AdminLoginController');
 Route::resource('/registeradmin' , 'AdminRegisterController');
-Route::resource('/login' ,'LoginController');
-Route::resource('/register' ,'RegisterController');
+Route::get('/logout' , 'LogoutController@logout');
+Route::get('/get' ,'LogoutController@check' );
+Route::group(['middleware' => ['checklogin']],function(){
+    Route::resource('/login' ,'LoginController');
+    Route::resource('/register' ,'RegisterController');
+});
 
 
-Route::group(['middleware' => ['authweb','auth']],function(){
+
+Route::group(['middleware' => ['authweb']],function(){
     Route::resource('/home' , 'HomeController');
     Route::resource('/berita' , 'BeritaController');
     Route::resource('/ayat' , 'AyatController');

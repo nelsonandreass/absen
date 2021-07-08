@@ -34,7 +34,7 @@
         </div>
         <div class="row ml-3 mb-3">
            <div class="col-2 p-0 m-0"><img class="col-12 icon " src="{{asset('assets/img/exit.png')}}" alt=""></div> 
-            <a href="{{route('login.create')}}" class=""><span class="text-decor-none">Keluar</span></a>
+            <a href="{{url('/logout')}}" class=""><span class="text-decor-none">Keluar</span></a>
         </div>
 
     </div>

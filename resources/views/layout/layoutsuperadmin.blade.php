@@ -105,7 +105,7 @@
                                 <span class="op-5 user-email text-decor-none" style="color: #FFFFFF;">{{Auth::user()->email}}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
-                               <a class="dropdown-item" href="{{route('login.create')}}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                               <a class="dropdown-item" href="{{url('/logout')}}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                             </ul>
                         </li>
                         <!-- ============================================================== -->

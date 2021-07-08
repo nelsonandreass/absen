@@ -19,12 +19,10 @@ class checkLoginMiddleware
     {
         
         if(Auth::check() == true){
-            
-            return redirect('/home');
+            return redirect()->back();
         }
-        else{
-            return redirect('/login');
-        }
-       
+       else{
+        return $next($request);
+       }
     }
 }

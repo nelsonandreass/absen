@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index()
     {
         
-        $name = User::find(Auth::id())->pluck('name')->first();
+        $name = Auth::user()->name;
         $beritaumum = Berita::where('wadah',"umum")->orderBy('created_at','desc')->first();
         $beritabic = Berita::where('wadah',"bic")->orderBy('created_at','desc')->first();
         $beritayouth = Berita::where('wadah',"youth")->orderBy('created_at','desc')->first();

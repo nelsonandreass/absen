@@ -14,7 +14,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $name = User::find(Auth::id())->pluck('name')->first();
+        $name =  Auth::user()->name;
         return view('profile.index' , ['active' => "Profile" , 'name' => $name]);
     }
 
