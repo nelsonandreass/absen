@@ -1,7 +1,7 @@
 @extends('layout.layoutsuperadmin')
 
 @section('content')
-    <div class="page-wrapper ">
+    <div class="page-wrapper">
         <div class="container-fluid">
             <center>
                 <div class="row">&nbsp;</div>
@@ -27,7 +27,7 @@
                    <center id="absen" style="display:none;">
                         <div class="row">
                             <center>
-                                <h2 id="greeting" ></h2>
+                                <h2 id="greeting" style="display:none;"></h2>
                             </center>
                         </div>
                         <div class="row">
@@ -59,9 +59,10 @@
     </div>
     <script> 
         $("#jenis").val($("#option-ibadah").val());
-
+        $("h2").text($("#option-ibadah").val());
         function change(){
             var jenisibadah = $("#option-ibadah").val();
+            console.log(jenisibadah);
             $("#jenis").val(jenisibadah);
             $("h2").text(jenisibadah);
         }

@@ -20,7 +20,7 @@ class SuperAdminController extends Controller
     //home
     public function index(){
         $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
-        $absens = Absen::select('jenis','tanggal')->distinct('tanggal','jenis')->get();
+        $absens = Absen::select('jenis','tanggal')->distinct('tanggal','jenis')->orderBy('tanggal',"desc")->get();
         //$absens = DB::table('absens')->select('tanggal',DB::raw('count(id) as total'))->orderBy('tanggal','asc')->groupBy('tanggal')->get();
       
         return view('superadmin.index' , ['beritas' => $beritas , 'absens' => $absens]);
