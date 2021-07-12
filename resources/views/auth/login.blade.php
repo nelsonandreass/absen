@@ -24,10 +24,11 @@
             </div>
         </div>
     </form>
-    <div class="row hero fixed-bottom">
+    <center>
+    <div class=" hero fixed-bottom">
         <img src="{{asset('assets/img/hero.png')}}" alt="">
     </div>
-
+    </center>
     <!-- <div class="login-form">
         <span class="title m-3 mt-5">Login</span>
         @if(Session::has('error'))

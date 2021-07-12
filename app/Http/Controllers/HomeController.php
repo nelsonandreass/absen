@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index()
     {
         
-        $name = Auth::user()->name;
+        $name = Auth::user();
         $beritaumum = Berita::where('wadah',"umum")->orderBy('created_at','desc')->first();
         $beritabic = Berita::where('wadah',"bic")->orderBy('created_at','desc')->first();
         $beritayouth = Berita::where('wadah',"youth")->orderBy('created_at','desc')->first();
@@ -30,7 +30,7 @@ class HomeController extends Controller
         if(is_null($beritayouth)){
             $beritayouth = "";
         }
-        return view('home.index' ,['active' => "Home" ,'name' => $name , 'beritaumum' => $beritaumum , 'beritabic' => $beritabic , 'beritayouth' => $beritayouth]);
+        return view('home.index' ,['active' => "Home" ,'user' => $name , 'beritaumum' => $beritaumum , 'beritabic' => $beritabic , 'beritayouth' => $beritayouth]);
     }
 
     /**

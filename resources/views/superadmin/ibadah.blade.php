@@ -12,7 +12,7 @@
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div> -->
-                   <form action="{{url('/buatibadah')}}" class="col-5" method="POST" id="option">
+                   <form action="" class="col-5" method="POST" id="option">
                         @csrf
                         <label for="" class="text-center">Jenis Ibadah</label>
                         <select name="jenis" id="option-ibadah" class="form-control" onchange="change()">
@@ -27,7 +27,7 @@
                    <center id="absen" style="display:none;">
                         <div class="row">
                             <center>
-                                <h2 id="greeting"></h2>
+                                <h2 id="greeting" ></h2>
                             </center>
                         </div>
                         <div class="row">
@@ -63,6 +63,7 @@
         function change(){
             var jenisibadah = $("#option-ibadah").val();
             $("#jenis").val(jenisibadah);
+            $("h2").text(jenisibadah);
         }
        
 

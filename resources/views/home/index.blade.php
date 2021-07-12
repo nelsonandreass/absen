@@ -5,12 +5,12 @@
     <div class="container" style="display:none;">   
         <div class="row">
             <div class="col-11  card ml-3 mt-3 mr-3 main-page" style="">
-                <span class="title mt-3 text-center">Hi, <span class="text-color-primary">{{$name}}</span></span>
+                <span class="title mt-3 text-center">Hi, <span class="text-color-primary">{{$user->name}}</span></span>
                 <div class="row">&nbsp;</div>
                 <div class="row">
                     <div class="col-4"></div>
                     <div class="col-4 p-0">
-                        <img class="barcode " src="{{asset('/assets/img/qr.png')}}" alt="">
+                        <img class="barcode " src="https://api.qrserver.com/v1/create-qr-code/?data={{$user->kartu}}&amp;size=100x100" alt="">
                     </div>
                     <div class="col-4"></div>
                 </div>
@@ -20,7 +20,7 @@
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
-
+               
 
             </div>
         </div>
@@ -43,15 +43,15 @@
         <div id="label-active" class="row col-3 label-berita"></div>
         <div class="row m-3">
             <div id="content-umum" class="col-12 p-0">
-                {{$beritaumum->judul ?? ""}} <br>
+                <b>{{$beritaumum->judul ?? ""}}</b> <br>
                 {{$beritaumum->berita ?? ""}}
             </div>
             <div id="content-bic" class="col-12 p-0" style="display:none;">
-                {{$beritabic->judul ?? ""}} <br>
+                <b>{{$beritabic->judul ?? ""}} </b><br>
                 {{$beritabic->berita ?? ""}}
             </div>
             <div id="content-youth" class="col-12 p-0" style="display:none;">
-                {{$beritayouth->judul ?? ""}} <br>
+                <b>{{$beritayouth->judul ?? ""}}</b> <br>
                 {{$beritayouth->berita ?? ""}}
             </div>
         </div>

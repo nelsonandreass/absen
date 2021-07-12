@@ -14,8 +14,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $name =  Auth::user()->name;
-        return view('profile.index' , ['active' => "Profile" , 'name' => $name]);
+        $name =  Auth::user();
+        
+        return view('profile.index' , ['active' => "Profile" , 'user' => $name]);
     }
 
     /**
@@ -25,7 +26,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        $user = User::find(Auth::id());
+        $user = Auth::user();
         return view('profile.profile',['active' => "Profile", 'user' => $user]);
     }
 

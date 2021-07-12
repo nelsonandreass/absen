@@ -32,6 +32,7 @@
 <style>
     body{
         font-family: 'Poppins', sans-serif !important;
+        background-color: #eef5f9 !important;
     }
 
 </style>
@@ -115,14 +116,22 @@
                 </div>
             </nav>
         </header>
-        <aside class="left-sidebar" data-sidebarbg="skin6">
+        <aside class="left-sidebar" id="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
+            <div class="scroll-sidebar" id="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+                <nav class="sidebar-nav" id="sidebar-nav">
                     <ul id="sidebarnav">
                         <!-- User Profile-->
-                        <li>
+                        <li>    
+                        <li class="sidebar-item " id="id-menu" > <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="" aria-expanded="false"><i class="mdi mdi-close"></i></a></li>
+                        <li class="sidebar-item " id="id-close"  style="display:none;"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="" aria-expanded="false"><i class="mdi mdi-menu"></i></a></li>
+                        <!-- <div class="position-relative">
+                            <div class="mdi mdi-close ml-3 mt-3" id="arrow-left" onclick="hideleft()"> </div>
+                            <div class="mdi mdi-menu ml-3 mt-3" id="arrow-right" onclick="showleft()" style="display:none;"> </div>
+                        </div> -->
                             <!-- User Profile-->
                             <!-- <div class="user-profile d-flex no-block dropdown m-t-20">
                                 
@@ -153,18 +162,20 @@
                         </li>
                         
                         <!-- User Profile-->
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/super')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/ibadah')}}" aria-expanded="false"><i
-                                    class="mdi mdi-account-plus"></i><span class="hide-menu">Absen</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/listjemaat')}}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
-                                    class="hide-menu">Jemaat</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/berita')}}" aria-expanded="false"><i class="mdi mdi-tooltip-edit"></i><span
-                                    class="hide-menu">Berita</span></a></li>
+                        <div id="wrapper-sidebar">
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{url('/super')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                        class="hide-menu">Dashboard</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{url('/ibadah')}}" aria-expanded="false"><i
+                                        class="mdi mdi-account-plus"></i><span class="hide-menu">Absen</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{url('/listjemaat')}}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
+                                        class="hide-menu">Jemaat</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{url('/berita')}}" aria-expanded="false"><i class="mdi mdi-tooltip-edit"></i><span
+                                        class="hide-menu">Berita</span></a></li>
+                        </div>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="icon-material.html" aria-expanded="false"><i class="mdi mdi-face"></i><span
                                     class="hide-menu">Icon</span></a></li>
@@ -205,7 +216,36 @@
     <script src="{{asset('superadmin/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
     <script src="{{asset('superadmin/dist/js/pages/dashboards/dashboard1.js')}}"></script> -->
     <script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
-   
+    <script>
+        function hideleft(){
+            $("#left-sidebar").animate({width : "50px"});
+            $("#wrapper-sidebar").hide();
+            $("#arrow-left").hide();
+            $("#arrow-right").show();
+        }
+        function showleft(){
+            $("#left-sidebar").animate({width : "250px"});
+            $("#wrapper-sidebar").show();
+            $("#arrow-left").show();
+            $("#arrow-right").hide();
+        }
+        $(document).ready(function(){
+            $("#id-menu").click(function(e){
+                e.preventDefault();
+                $("#left-sidebar").animate({width : "70px"});
+                $("#wrapper-sidebar").hide(300);
+                $("#id-menu").hide();
+                $("#id-close").show();
+            });
+            $("#id-close").click(function(e){ 
+                e.preventDefault();
+                $("#left-sidebar").animate({width : "250px"});
+                $("#wrapper-sidebar").show(300);
+                $("#id-menu").show();
+                $("#id-close").hide();
+            });
+        });
+    </script>
 </body>
 
 </html>

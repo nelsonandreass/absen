@@ -11,10 +11,10 @@
                 <div class="col-4"></div>
                 <div class="col-4 p-0 w-100">
                     <div class="row">
-                        <img class="col-12 barcode" src="{{asset('/assets/img/qr.png')}}" alt="">
+                        <img class="col-12 barcode" src="https://api.qrserver.com/v1/create-qr-code/?data={{$user->kartu}}&amp;size=100x100" alt="">
                     </div>
                     <div class="row">
-                        <p class="col-12 greeting text-center mt-2 p-0">{{$name}}</p>
+                        <p class="col-12 greeting text-center mt-2 p-0">{{$user->name}}</p>
                     </div>
                 </div>
                 <div class="col-4"></div>

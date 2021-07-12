@@ -17,9 +17,18 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
 class SuperAdminController extends Controller
 {
+    //home
     public function index(){
-        return view('superadmin.index');
+        $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
+        $absens = Absen::select('jenis','tanggal')->distinct('tanggal','jenis')->get();
+        //$absens = DB::table('absens')->select('tanggal',DB::raw('count(id) as total'))->orderBy('tanggal','asc')->groupBy('tanggal')->get();
+      
+        return view('superadmin.index' , ['beritas' => $beritas , 'absens' => $absens]);
     }
+
+    //end of home
+
+
     //absen
     public function ibadah(){
         return view('superadmin.ibadah');
@@ -30,7 +39,7 @@ class SuperAdminController extends Controller
         $user_id = $request->input('user_id');
         $user_name = $request->input('user_name');
         $jenis = $request->input('jenis');
-        $date = date('d/m/Y');
+        $date = date('d-m-Y');
 
         $data = new Absen();
         $data->ibadah_id = $ibadah_id;
@@ -54,6 +63,11 @@ class SuperAdminController extends Controller
         //     "greet" => "Selamat Beribadah"
         // );
         return json_encode($response);
+    }
+
+    public function absenDetail($ibadah,$tanggal){
+        $datas = Absen::with('users')->where('jenis',$ibadah)->where('tanggal',$tanggal)->first();
+        return view('superadmin.absendetail' , ['datas' => $datas->users]);
     }
 
         //tidak di pakai

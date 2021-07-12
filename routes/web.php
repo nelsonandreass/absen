@@ -40,6 +40,7 @@ Route::group(['middleware' => 'role'],function(){
     // Route::get('/absen' , 'SuperAdminController@absen');
     Route::post('/absenprocess' , 'SuperAdminController@absenProcess');
     Route::get('/getabsen' , 'SuperAdminController@getAbsen');
+    Route::get('/absen/{ibadah}/{tanggal}','SuperAdminController@absenDetail');
 
     //jemaat
     Route::get('/listjemaat' , 'SuperAdminController@listjemaat');

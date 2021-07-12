@@ -22,7 +22,7 @@ class checkLoginMiddleware
             return redirect()->back();
         }
        else{
-        return $next($request);
+            return $next($request);
        }
     }
 }
