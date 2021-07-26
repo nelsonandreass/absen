@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,7 +24,11 @@
         
     </head>
     <body>
-        
+        @if(Auth::user()->role == 'user')
+            <div class="d-none d-lg-block mb-3">
+                @include('parts.upperNav')
+            </div>
+        @endif
     @yield('content')
         @if(Auth::check() == false)
             <div class="container fixed-top">
@@ -47,9 +53,10 @@
         
         
         @elseif(Auth::user()->role == 'user')
-        <div class="d-block d-md-none">
+        <div class="d-block d-lg-none">
             @include('parts.bottomNav')
         </div>
+        
         @elseif(Auth::user()->role == 'admin')
         <div class="d-block d-md-none">
             @include('parts.bottomNavAdmin')

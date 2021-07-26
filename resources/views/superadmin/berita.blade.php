@@ -17,6 +17,7 @@
                         <th>Judul</th>
                         <th>Berita</th>
                         <th>Wadah</th>
+                        <th>Tanggal</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
@@ -27,6 +28,7 @@
                                 <td>{{$data->judul}}</td>
                                 <td>{{$data->berita}}</td>
                                 <td>{{$data->wadah}}</td>
+                                <td>{{$data->created_at}}</td>
                                 <td>
                                     <a href="{{url('/updateberita',$data->id)}}" class="btn btn-primary" >Lihat</a>
                                 </td>

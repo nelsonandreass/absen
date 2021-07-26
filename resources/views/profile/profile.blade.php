@@ -8,7 +8,7 @@
         <div class="row">&nbsp;</div>
 
         <div class="row m-3">
-            <div class="profile">
+            <div class="profile mx-auto">
                 <div class="row p-0 mt-3">
                     <div class="col-4"></div>
                     <div class="col-4 2-100">
