@@ -236,6 +236,7 @@
                 $("#wrapper-sidebar").hide(300);
                 $("#id-menu").hide();
                 $("#id-close").show();
+                $(".page-wrapper").animate({"margin-left" : "5%"});
             });
             $("#id-close").click(function(e){ 
                 e.preventDefault();
@@ -243,6 +244,8 @@
                 $("#wrapper-sidebar").show(300);
                 $("#id-menu").show();
                 $("#id-close").hide();
+                $(".page-wrapper").animate({"margin-left" : "250px"});
+
             });
         });
     </script>

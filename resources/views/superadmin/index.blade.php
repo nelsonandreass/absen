@@ -25,7 +25,7 @@
                 <!-- ============================================================== -->
                 <!-- Sales chart -->
                 <!-- ============================================================== -->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
@@ -71,27 +71,13 @@
                                             @endif
                                             
                                         @endforeach
-                                        <!-- <li class="feed-item">
-                                            <div class="feed-icon bg-info"><i class="mdi mdi-face-profile"></i></div> Jemaat<span class="ms-auto font-12 text-muted"></span>
-                                        </li>
-                                        <li class="feed-item">
-                                            <div class="feed-icon bg-success"><i class="ti-server"></i></div> Server #1
-                                            overloaded.<span class="ms-auto font-12 text-muted">2 Hours ago</span>
-                                        </li>
-                                        <li class="feed-item">
-                                            <div class="feed-icon bg-warning"><i class="ti-shopping-cart"></i></div> New
-                                            order received.<span class="ms-auto font-12 text-muted">31 May</span>
-                                        </li>
-                                        <li class="feed-item">
-                                            <div class="feed-icon bg-danger"><i class="ti-user"></i></div> New user
-                                            registered.<span class="ms-auto font-12 text-muted">30 May</span>
-                                        </li> -->
+                                      
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- ============================================================== -->
                 <!-- Sales chart -->
                 <!-- ============================================================== -->
@@ -153,14 +139,13 @@
                 <!-- Recent comment and chats -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <!-- column -->
-                    <div class="col-lg-6">
+                    <!-- column  recent comments-->
+                    <!-- <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Recent Comments</h4>
                             </div>
                             <div class="comment-widgets scrollable">
-                                <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row m-t-0">
                                     <div class="p-2"><img src="../../assets/images/users/1.jpg" alt="user" width="50"
                                             class="rounded-circle"></div>
@@ -179,7 +164,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row">
                                     <div class="p-2"><img src="../../assets/images/users/4.jpg" alt="user" width="50"
                                             class="rounded-circle"></div>
@@ -198,7 +182,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row">
                                     <div class="p-2"><img src="../../assets/images/users/5.jpg" alt="user" width="50"
                                             class="rounded-circle"></div>
@@ -219,9 +202,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- column -->
-                    <div class="col-lg-6">
+                    </div> -->
+                    <!-- column temp-->
+                    <!-- <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Temp Guide</h4>
@@ -276,7 +259,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- ============================================================== -->
                 <!-- Recent comment and chats -->

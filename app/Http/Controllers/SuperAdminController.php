@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
 
 class SuperAdminController extends Controller
 {
@@ -209,16 +210,17 @@ class SuperAdminController extends Controller
     }
     public function uploadprocess(Request $request){
         $excel = $request->file('excel');
-        // $name =$excel->getClientOriginalName();
-        // $save = Storage::putFileAs('public',$excel, $name);
         $rows = Excel::toArray(new UsersImport,$excel);
+
+
         for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
+        
             if(!is_null($rows[0][$i][6])){
                 $ttl = explode("," , $rows[0][$i][6]);
             }
-           
             $user = new User();
             $user->name = $rows[0][$i][0];
+            $user->kartu = $rows[0][$i][2];
             $user->email = $rows[0][$i][0].$ttl[1].'@gmail.com';
             $user->password = $rows[0][$i][0];
             $user->jenis_kelamin = $rows[0][$i][4];
@@ -232,8 +234,10 @@ class SuperAdminController extends Controller
             $user->save();
         }
        
-        // dd($rows[0][1]);
     }
+
+
+   
 
     public function uploadfoto(){
         return view('superadmin.uploadfoto');

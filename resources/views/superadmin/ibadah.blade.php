@@ -2,20 +2,16 @@
 
 @section('content')
     <div class="page-wrapper">
-        <div class="container-fluid">
+        <div class="container-fluid" id="container-fluid">
             <center>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
-                <!-- <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div> -->
                    <form action="" class="col-5" method="POST" id="option">
                         @csrf
                         <label for="" class="text-center">Jenis Ibadah</label>
                         <select name="jenis" id="option-ibadah" class="form-control" onchange="change()">
+                            <option value="default" style="color: #DBDBDB">Pilih jenis ibadah......</option>    
                             <option value="ibadah1">Ibadah 1</option>
                             <option value="ibadah2">Ibadah 2</option>
                             <option value="bic">BIC</option>
@@ -27,9 +23,16 @@
                    <center id="absen" style="display:none;">
                         <div class="row">
                             <center>
-                                <h2 id="greeting" style="display:none;"></h2>
+                                <h2 id="jenis" class="mb-2" style="display:none;"></h2>
+                            </center>
+                            <center>
+                                <h4 id="greeting" class="mt-2" style="display:none;"></h4>
                             </center>
                         </div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">&nbsp;</div>
+
                         <div class="row">
                             <div class="col-4"></div>
                             <div class="col-4">
@@ -58,13 +61,10 @@
         </div>
     </div>
     <script> 
-        $("#jenis").val($("#option-ibadah").val());
-        $("h2").text($("#option-ibadah").val());
+        
+        
         function change(){
             var jenisibadah = $("#option-ibadah").val();
-            console.log(jenisibadah);
-            $("#jenis").val(jenisibadah);
-            $("h2").text(jenisibadah);
         }
        
 
@@ -72,73 +72,62 @@
             setInterval(() => {
                 var foto = 'http://localhost:8000/assets/img/user-black.png';
                 $("#foto-jemaat").attr("src",foto);
-            }, 5000);
+                $("#greeting").hide();
+            }, 4000);
 
             $("#btn").click(function(e){
                 e.preventDefault();
-                $("#option").hide();
-                $("#absen").show();
-                $("#userid").focus();
+                var jenisibadah = $("#option-ibadah").val();
+                if(jenisibadah != 'default'){
+                    $("#option").hide();
+                    $("#absen").show();
+                    $("#userid").focus();
+                    $("#jenis").show();
+                    if(jenisibadah == 'ibadah1'){
+                        $("#jenis").text("IBADAH 1");
+                    }
+                    else if(jenisibadah == "ibadah2"){
+                        $("#jenis").text("IBADAH 2");
+                    }
+                    else if(jenisibadah == "bic"){
+                        $("#jenis").text("BIC");
+                    }
+                    else if(jenisibadah == "youth"){
+                        $("#jenis").text("Youth");
+                    }
+                }
             });
+
             $("#userid").on('input',function(e){
                 e.preventDefault();
                 var userid = $("#userid").val();
                 if(userid.length == 7){
                     var http = new XMLHttpRequest();
                     var url = '/absenprocess';
-                    var params = 'ibadah_id=1&user_id='+userid+'&jenis='+$("#jenis").val()+'&_token={{csrf_token()}}';
+                    var params = 'ibadah_id=1&user_id='+userid+'&jenis='+$("#option-ibadah").val()+'&_token={{csrf_token()}}';
                     http.open('POST', url, true);
                     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-                    http.onreadystatechange = function() {//Call a function when the state changes.
+                    http.send(params);
+                    http.onreadystatechange = function() {
+                        //Call a function when the state changes.
                         if(http.readyState == 4 && http.status == 200) {
                             $("#userid").val("");
                             $("#userid").focus();
                             var data= JSON.parse(http.responseText);
-                            var foto = 'http://localhost:8000/assets/img/'+data.foto;
+                            var foto = 'http://localhost:8000/storage/'+data.foto;
                             $("#foto-jemaat").attr("src",foto);
-                            $("#greeting").val("Selamat Beribadah " + data.name);
-                            
+                            $("#greeting").text("Selamat Beribadah " + data.name);
+                            $("#greeting").show();
+                           
                         }
                     }
-                    http.send(params);
+                    
+                   
                 }
             });
-            // $("#userid").change(function(e){
-            //     e.preventDefault();
-            //     var userid = $("#userid").val();
-            //     var http = new XMLHttpRequest();
-            //     var url = '/absenprocess';
-            //     var params = 'ibadah_id=1&user_id=1&user_name='+userid+'&jenis='+$("#jenis").val()+'&_token={{csrf_token()}}';
-            //     http.open('POST', url, true);
-            //     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-            //     http.onreadystatechange = function() {//Call a function when the state changes.
-            //         if(http.readyState == 4 && http.status == 200) {
-            //             $("#userid").val("");
-            //             $("#userid").focus();
-            //         }
-            //     }
-            //     http.send(params);
-                
-            // });
+          
         });
-        // function absen(){
-        //     var userid = $("#userid").val();
-        //     var http = new XMLHttpRequest();
-        //     var url = '/absenprocess';
-        //     var params = 'ibadah_id=1&user_id=1&user_name='+userid+'&jenis='+$("#jenis").val()+'&_token={{csrf_token()}}';
-        //     http.open('POST', url, true);
-        //     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        //     http.onreadystatechange = function() {//Call a function when the state changes.
-        //         if(http.readyState == 4 && http.status == 200) {
-        //             $("#userid").val("");
-        //         }
-        //     }
-        //     http.send(params);
-
-        // }
+       
     </script>
 @endsection
 
