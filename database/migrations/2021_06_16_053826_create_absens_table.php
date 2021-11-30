@@ -16,7 +16,7 @@ class CreateAbsensTable extends Migration
         Schema::create('absens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('ibadah_id');
-            $table->integer('user_id');
+            $table->string('user_id');
             $table->string('user_name')->nullable();
             $table->string('jenis');
             $table->string('tanggal');

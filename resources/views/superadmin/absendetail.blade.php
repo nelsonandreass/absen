@@ -13,15 +13,15 @@
                 <tbody>
                     <?php $i = 1?>
                     @foreach($datas as $data)
-                        
+                        @foreach($data->users as $user)
                             <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$data->name}}</td>
-                                <td>{{$data->telepon}}</td>
-                                <td><img src="{{asset('storage/'.$data->foto)}}" class="icon" alt="{{$data->foto}}"></td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->telepon}}</td>
+                                <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
                             </tr>
                             <?php $i++?>
-                        
+                        @endforeach
                     @endforeach
                 </tbody>
            </table> 

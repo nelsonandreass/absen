@@ -32,9 +32,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Nomor Keluarga</label>
+                    <label for="" class="col-sm-2 col-form-label">Nomor Kartu</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nokeluarga"  value="{{$datas->no_keluarga}}">
+                    <input type="text" class="form-control" name="nokartu"  value="{{$datas->kartu}}">
                     </div>
                 </div>
                 <div class="form-group row">

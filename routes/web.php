@@ -1,5 +1,5 @@
 <?php
-
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +30,16 @@ Route::group(['middleware' => ['authweb']],function(){
     Route::resource('/profile' , 'ProfileController');
 });
 
+route::get('/count' ,  function(){
+    // $count = User::where('kartu','LIKE','%309913%')->count();
+    // dd($count);
+    $kartu = '0573309913';
+    $strcut = substr($kartu,1,strlen($kartu));
+    die($strcut);
+
+});
+
+
 Route::group(['middleware' => 'role'],function(){
     //home
     Route::get('/super' , 'SuperAdminController@index');
@@ -46,6 +56,7 @@ Route::group(['middleware' => 'role'],function(){
     Route::get('/listjemaat' , 'SuperAdminController@listjemaat');
     Route::get('/showjemaat/{id}' , 'SuperAdminController@showjemaat' );
     Route::post('/update/jemaat' , 'SuperAdminController@updatejemaat');
+    Route::post('/searchjemaat' , 'SuperAdminController@searchJemaat');
 
     //berita
     Route::get('/berita' , 'SuperAdminController@berita');

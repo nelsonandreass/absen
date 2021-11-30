@@ -69,11 +69,7 @@
        
 
         $(document).ready(function(){
-            setInterval(() => {
-                var foto = 'http://localhost:8000/assets/img/user-black.png';
-                $("#foto-jemaat").attr("src",foto);
-                $("#greeting").hide();
-            }, 4000);
+           
 
             $("#btn").click(function(e){
                 e.preventDefault();
@@ -96,12 +92,15 @@
                         $("#jenis").text("Youth");
                     }
                 }
+                else{
+                    alert("Pilih jenis ibadah");
+                }
             });
 
             $("#userid").on('input',function(e){
                 e.preventDefault();
                 var userid = $("#userid").val();
-                if(userid.length == 7){
+                if(userid.length >= 8){
                     var http = new XMLHttpRequest();
                     var url = '/absenprocess';
                     var params = 'ibadah_id=1&user_id='+userid+'&jenis='+$("#option-ibadah").val()+'&_token={{csrf_token()}}';
@@ -109,17 +108,46 @@
                     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                     http.send(params);
                     http.onreadystatechange = function() {
-                        //Call a function when the state changes.
-                        if(http.readyState == 4 && http.status == 200) {
+                        //Call a function when the state changes.'
+                        var data= JSON.parse(http.responseText);
+                        if(data.error_code == '0000'){
                             $("#userid").val("");
                             $("#userid").focus();
                             var data= JSON.parse(http.responseText);
-                            var foto = 'http://localhost:8000/storage/'+data.foto;
+                            var foto = '/storage/'+data.foto;
                             $("#foto-jemaat").attr("src",foto);
                             $("#greeting").text("Selamat Beribadah " + data.name);
                             $("#greeting").show();
-                           
+                            setInterval(function() {
+                                var foto = '/assets/img/user-black.png';
+                                $("#foto-jemaat").attr("src",foto);
+                                $("#greeting").hide();
+                            }, 4000);
+                            
                         }
+                        else if(data.error_code != '0000'){
+                            $("#userid").val("");
+                            $("#userid").focus();
+                            $("#greeting").text("Tidak terdaftar");
+                            $("#greeting").show();
+                            setInterval(function(){
+                                $("#greeting").hide();
+                            }, 4000);
+                        }
+                        // if(http.readyState == 4 && http.status == 200) {
+                        //     $("#userid").val("");
+                        //     $("#userid").focus();
+                        //     var data= JSON.parse(http.responseText);
+                        //     var foto = '/storage/'+data.foto;
+                        //     $("#foto-jemaat").attr("src",foto);
+                        //     $("#greeting").text("Selamat Beribadah " + data.name);
+                        //     $("#greeting").show();
+                        //     setInterval(() => {
+                        //         var foto = '/assets/img/user-black.png';
+                        //         $("#foto-jemaat").attr("src",foto);
+                        //         $("#greeting").hide();
+                        //     }, 4000);
+                        // }
                     }
                     
                    
@@ -127,6 +155,10 @@
             });
           
         });
+
+        function swapImage(){
+
+        }
        
     </script>
 @endsection

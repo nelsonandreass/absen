@@ -21,7 +21,7 @@ class SuperAdminController extends Controller
     //home
     public function index(){
         $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
-        $absens = Absen::select('jenis','tanggal')->distinct('tanggal','jenis')->orderBy('tanggal',"desc")->get();
+        $absens = Absen::select('jenis','tanggal')->distinct('tanggal','jenis')->orderBy('tanggal',"desc")->take('5')->get();
         //$absens = DB::table('absens')->select('tanggal',DB::raw('count(id) as total'))->orderBy('tanggal','asc')->groupBy('tanggal')->get();
       
         return view('superadmin.index' , ['beritas' => $beritas , 'absens' => $absens]);
@@ -42,33 +42,45 @@ class SuperAdminController extends Controller
         $jenis = $request->input('jenis');
         $date = date('d-m-Y');
 
-        $data = new Absen();
-        $data->ibadah_id = $ibadah_id;
-        $data->user_id = $user_id;
-        $data->user_name = $user_name;
-        $data->jenis = $jenis;
-        $data->tanggal = $date;
-        $data->save();
-        $user = Absen::with(['users'])->where('user_id',$user_id)->first();
-
-        foreach($user->users as $key => $userdata){
+        $cardshort = substr($user_id,1,strlen($user_id));
+    
+        $checkUser = User::where('kartu','LIKE',"%$cardshort%")->first();
+      
+        $response;
+        if(!is_null($checkUser)){
+            $data = new Absen();
+            $data->ibadah_id = $ibadah_id;
+            $data->user_id = $checkUser['kartu'];
+            $data->user_name = $user_name;
+            $data->jenis = $jenis;
+            $data->tanggal = $date;
+            $data->save();
+            $user = Absen::with(['users'])->where('user_id',$checkUser['kartu'])->first();
+            
+            //var_dump($user);
+           
+            foreach($user->users as $userdata){
+                $response = array(
+                    "error_code" => '0000',
+                    "error_message" => "Success",
+                    "name" => $userdata->name,
+                    "foto" => $userdata->foto,
+                    "greet" => "Selamat Beribadah"
+                );
+            }
+        }
+        else{
             $response = array(
-                "name" => $userdata->name,
-                "foto" => $userdata->foto,
-                "greet" => "Selamat Beribadah"
+                "error_code" => '0001',
+                "error_message" => "tidak terdaftar"
             );
         }
-
-        // $response = array(
-        //     "name" => "Nelson",
-        //     "greet" => "Selamat Beribadah"
-        // );
         return json_encode($response);
     }
 
     public function absenDetail($ibadah,$tanggal){
-        $datas = Absen::with('users')->where('jenis',$ibadah)->where('tanggal',$tanggal)->first();
-        return view('superadmin.absendetail' , ['datas' => $datas->users]);
+        $datas = Absen::with('users')->where('jenis',$ibadah)->where('tanggal',$tanggal)->get();
+        return view('superadmin.absendetail' , ['datas' => $datas]);
     }
 
         //tidak di pakai
@@ -91,7 +103,7 @@ class SuperAdminController extends Controller
     //jemaat
     public function listjemaat(){
         $users = User::where('role' , 'user')->orderBy('name','asc')->get();
-        return view('superadmin.listjemaat' , ['users' => $users]);
+        return view('superadmin.listjemaat' , ['users' => $users, 'json' => json_encode($users)]);
     }
 
     public function showjemaat($id){
@@ -105,7 +117,7 @@ class SuperAdminController extends Controller
         $email = $request->input('email');
         $telepon = $request->input('telepon');
         $alamat = $request->input('alamat');
-        $nokeluarga = $request->input('nokeluarga');
+        $nokartu = $request->input('nokartu');
         $foto = $request->file('foto');
        
 
@@ -116,7 +128,7 @@ class SuperAdminController extends Controller
                 'email' => $email,
                 'nomor_telepon' => $telepon,
                 'alamat' => $alamat,
-                'no_keluarga' => $nokeluarga,
+                'kartu' => $nokartu,
                 'foto' => $namafoto
             );
         }
@@ -125,13 +137,27 @@ class SuperAdminController extends Controller
                 'email' => $email,
                 'nomor_telepon' => $telepon,
                 'alamat' => $alamat,
-                'no_keluarga' => $nokeluarga,
+                'kartu' => $nokartu,
                
             );
         }
         
         $user = User::where('id', $id)->update($array);
         return redirect('/listjemaat');
+    }
+
+    public function searchJemaat(Request $request){
+        $username = $request->input('jemaat');
+        $datas = User::where('name' , 'LIKE' , $username.'%')->get();
+        $response = array();
+        foreach($datas as $data){
+            $datajemaat = array(
+                'id' => $data->id,
+                'name' => $data->name
+            ); 
+            array_push($response,$datajemaat);
+        }
+        return json_encode($response);
     }
     //end of jemaat
 
@@ -212,26 +238,40 @@ class SuperAdminController extends Controller
         $excel = $request->file('excel');
         $rows = Excel::toArray(new UsersImport,$excel);
 
-
-        for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
         
-            if(!is_null($rows[0][$i][6])){
-                $ttl = explode("," , $rows[0][$i][6]);
-            }
+        for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
             $user = new User();
-            $user->name = $rows[0][$i][0];
-            $user->kartu = $rows[0][$i][2];
-            $user->email = $rows[0][$i][0].$ttl[1].'@gmail.com';
-            $user->password = $rows[0][$i][0];
-            $user->jenis_kelamin = $rows[0][$i][4];
-            $user->status_pernikahan = $rows[0][$i][5];
-            $user->alamat = $rows[0][$i][7];
-            if(!is_null($rows[0][$i][6])){
-                $user->tanggal_lahir = $ttl[1];
-                $user->tempat_lahir = $ttl[0];
-            }
-            $user->nomor_telepon = $rows[0][$i][8];
+            $user->name = $rows[0][$i][1];
+            $user->kartu = $rows[0][$i][4];
+            // $user->email = $rows[0][$i][0].$ttl[1].'@gmail.com';
+            // $user->password = $rows[0][$i][0];
+            // $user->jenis_kelamin = $rows[0][$i][4];
+            // $user->status_pernikahan = $rows[0][$i][5];
+            // $user->alamat = $rows[0][$i][7];
+            // if(!is_null($rows[0][$i][6])){
+            //     $user->tanggal_lahir = $ttl[1];
+            //     $user->tempat_lahir = $ttl[0];
+            // }
+            // $user->nomor_telepon = $rows[0][$i][8];
             $user->save();
+
+            // if(!is_null($rows[0][$i][6])){
+            //     $ttl = explode("," , $rows[0][$i][6]);
+            // }
+            // $user = new User();
+            // $user->name = $rows[0][$i][0];
+            // $user->kartu = $rows[0][$i][2];
+            // $user->email = $rows[0][$i][0].$ttl[1].'@gmail.com';
+            // $user->password = $rows[0][$i][0];
+            // $user->jenis_kelamin = $rows[0][$i][4];
+            // $user->status_pernikahan = $rows[0][$i][5];
+            // $user->alamat = $rows[0][$i][7];
+            // if(!is_null($rows[0][$i][6])){
+            //     $user->tanggal_lahir = $ttl[1];
+            //     $user->tempat_lahir = $ttl[0];
+            // }
+            // $user->nomor_telepon = $rows[0][$i][8];
+            // $user->save();
         }
        
     }
