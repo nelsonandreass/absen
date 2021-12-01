@@ -31,19 +31,15 @@ Route::group(['middleware' => ['authweb']],function(){
 });
 
 route::get('/count' ,  function(){
-    // $count = User::where('kartu','LIKE','%309913%')->count();
-    // dd($count);
-    $kartu = '0573309913';
-    $strcut = substr($kartu,1,strlen($kartu));
-    die($strcut);
-
+    $count = User::whereRaw('LENGTH(kartu) >= 7')->count();
+    dd($count);
 });
 
 
 Route::group(['middleware' => 'role'],function(){
     //home
     Route::get('/super' , 'SuperAdminController@index');
-    
+    Route::get('/allabsen' , 'SuperAdminController@getAllAbsen');
     //absen
     Route::get('/ibadah' , 'SuperAdminController@ibadah');
     // Route::post('/buatibadah' , 'SuperAdminController@buatIbadah');

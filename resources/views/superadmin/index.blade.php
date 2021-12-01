@@ -128,6 +128,10 @@
                                         
                                     </tbody>
                                 </table>
+                                <div class="col-6 px-3 pt-2 pb-3">
+                                    <a href="{{url('/allabsen')}}">Lihat</a>
+                                </div>
+                                
                             </div>
                             <div class="row">
                               

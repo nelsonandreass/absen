@@ -10,7 +10,19 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                    <input type="text" readonly class="form-control"  value="{{$datas->name}}">
+                    <input type="text" readonly class="form-control" name="name" value="{{$datas->name}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Tempat Lahir</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{$datas->tempat_lahir}}" name="tempatlahir">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                    <div class="col-sm-10">
+                    <input type="date" class="form-control" value="{{$datas->tanggal_lahir}}" name="tgllahir">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -18,7 +30,7 @@
                     <div class="col-sm-10">
                     <input type="text"  class="form-control" name="telepon"  value="{{$datas->nomor_telepon}}">
                     </div>
-                </div>
+                </div> 
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">E-mail</label>
                     <div class="col-sm-10">

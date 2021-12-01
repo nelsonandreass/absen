@@ -19,13 +19,22 @@ use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
 class SuperAdminController extends Controller
 {
     //home
+    
     public function index(){
         $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
-        $absens = Absen::select('jenis','tanggal')->distinct('tanggal','jenis')->orderBy('tanggal',"desc")->take('5')->get();
+        $absens = Absen::select('jenis','tanggal')->orderBy('tanggal','DESC')->distinct('tanggal','jenis')->take('6')->get();
+       
         //$absens = DB::table('absens')->select('tanggal',DB::raw('count(id) as total'))->orderBy('tanggal','asc')->groupBy('tanggal')->get();
       
         return view('superadmin.index' , ['beritas' => $beritas , 'absens' => $absens]);
     }
+
+    public function getAllAbsen(){
+        $absens = Absen::select('jenis','tanggal')->distinct('tanggal','jenis')->orderBy('tanggal',"desc")->get();
+        return view('superadmin.absen' , ['absens' => $absens]);
+    }
+
+
 
     //end of home
 
@@ -40,7 +49,7 @@ class SuperAdminController extends Controller
         $user_id = $request->input('user_id');
         $user_name = $request->input('user_name');
         $jenis = $request->input('jenis');
-        $date = date('d-m-Y');
+        $date = date('Y-m-d');
 
         $cardshort = substr($user_id,1,strlen($user_id));
     
@@ -84,25 +93,25 @@ class SuperAdminController extends Controller
     }
 
         //tidak di pakai
-        public function buatIbadah(Request $request){
-            $jenis = $request->input('jenis');
-            $data = new Ibadah();
-            $data->jenis_ibadah = $jenis;
-            $data->save();
-            return redirect('/absen')->with('jenis' , $jenis);
-        }
+        // public function buatIbadah(Request $request){
+        //     $jenis = $request->input('jenis');
+        //     $data = new Ibadah();
+        //     $data->jenis_ibadah = $jenis;
+        //     $data->save();
+        //     return redirect('/absen')->with('jenis' , $jenis);
+        // }
 
-        public function absen(){
+        // public function absen(){
 
-            $jenis = session()->get('jenis');
-            return view('superadmin.absen' , ['jenis' => $jenis]);
-        }
+        //     $jenis = session()->get('jenis');
+        //     return view('superadmin.absen' , ['jenis' => $jenis]);
+        // }
 
     //end of absen
 
     //jemaat
     public function listjemaat(){
-        $users = User::where('role' , 'user')->orderBy('name','asc')->get();
+        $users = User::where('role' , 'user')->orderBy('name','asc')->paginate(50);
         return view('superadmin.listjemaat' , ['users' => $users, 'json' => json_encode($users)]);
     }
 
@@ -118,18 +127,24 @@ class SuperAdminController extends Controller
         $telepon = $request->input('telepon');
         $alamat = $request->input('alamat');
         $nokartu = $request->input('nokartu');
+        $tanggallahir = $request->input('tgllahir');
+        $tempatlahir = $request->input('tempatlahir');
+        $name = $request->input('name');
         $foto = $request->file('foto');
        
 
         if(!is_null($foto)){
-            $namafoto = $foto->getClientOriginalName();
+            //$namafoto = $foto->getClientOriginalName();
+            $namafoto = $name . $foto->getClientOriginalExtension();
             $save = Storage::putFileAs('public',$foto, $namafoto);
             $array = array(
                 'email' => $email,
                 'nomor_telepon' => $telepon,
                 'alamat' => $alamat,
                 'kartu' => $nokartu,
-                'foto' => $namafoto
+                'foto' => $namafoto,
+                'tanggal_lahir' => $tanggallahir,
+                'tempat_lahir' => $tempatlahir
             );
         }
         else{
@@ -138,7 +153,8 @@ class SuperAdminController extends Controller
                 'nomor_telepon' => $telepon,
                 'alamat' => $alamat,
                 'kartu' => $nokartu,
-               
+                'tanggal_lahir' => $tanggallahir,
+                'tempat_lahir' => $tempatlahir
             );
         }
         
