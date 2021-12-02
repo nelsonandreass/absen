@@ -89,7 +89,7 @@ class SuperAdminController extends Controller
 
     public function absenDetail($ibadah,$tanggal){
         $datas = Absen::with('users')->where('jenis',$ibadah)->where('tanggal',$tanggal)->get();
-        return view('superadmin.absendetail' , ['datas' => $datas]);
+        return view('superadmin.absendetail' , ['datas' => $datas, 'ibadah' => $ibadah , 'tanggal' => $tanggal]);
     }
 
         //tidak di pakai
@@ -256,27 +256,12 @@ class SuperAdminController extends Controller
 
         
         for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
-            $user = new User();
-            $user->name = $rows[0][$i][1];
-            $user->kartu = $rows[0][$i][4];
-            // $user->email = $rows[0][$i][0].$ttl[1].'@gmail.com';
-            // $user->password = $rows[0][$i][0];
-            // $user->jenis_kelamin = $rows[0][$i][4];
-            // $user->status_pernikahan = $rows[0][$i][5];
-            // $user->alamat = $rows[0][$i][7];
-            // if(!is_null($rows[0][$i][6])){
-            //     $user->tanggal_lahir = $ttl[1];
-            //     $user->tempat_lahir = $ttl[0];
-            // }
-            // $user->nomor_telepon = $rows[0][$i][8];
-            $user->save();
-
+            //$user = new User();
             // if(!is_null($rows[0][$i][6])){
             //     $ttl = explode("," , $rows[0][$i][6]);
             // }
-            // $user = new User();
-            // $user->name = $rows[0][$i][0];
-            // $user->kartu = $rows[0][$i][2];
+            // // $user->name = $rows[0][$i][1];
+            // // $user->kartu = $rows[0][$i][4];
             // $user->email = $rows[0][$i][0].$ttl[1].'@gmail.com';
             // $user->password = $rows[0][$i][0];
             // $user->jenis_kelamin = $rows[0][$i][4];
@@ -288,8 +273,54 @@ class SuperAdminController extends Controller
             // }
             // $user->nomor_telepon = $rows[0][$i][8];
             // $user->save();
+
+            if(!is_null($rows[0][$i][6])){
+                $ttl = explode("," , $rows[0][$i][6]);
+            }
+            //$newDate = date('Y-m-d',$ttl[1]);
+           
+            
+            $user = new User();
+            $user->name = $rows[0][$i][0];
+            $user->kartu = $rows[0][$i][2];
+            $user->email = $rows[0][$i][0].$ttl[1].'@gmail.com';
+            $user->password = $rows[0][$i][0];
+            $user->jenis_kelamin = $rows[0][$i][4];
+            $user->status_pernikahan = $rows[0][$i][5];
+            $user->alamat = $rows[0][$i][7];
+            if(!is_null($rows[0][$i][6])){
+                $tanggal = str_replace(' ','',$ttl[1]);
+                $tanggal = str_replace('/','-',$tanggal);
+    
+                $user->tanggal_lahir = date('Y-m-d', strtotime($tanggal));        
+                $user->tempat_lahir = $ttl[0];
+            }
+            $user->nomor_telepon = $rows[0][$i][8];
+            $user->save();
         }
        
+    }
+
+    public function uploadkartu(){
+        return view('superadmin.uploadkartu');
+    }
+    public function uploadkartuprocess(Request $request){
+        $excel = $request->file('excel');
+        $rows = Excel::toArray(new UsersImport,$excel);
+
+        
+        for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
+            
+         
+
+            if(!is_null($rows[0][$i][3])){
+                $array = array(
+                    'kartu' => $rows[0][$i][3]
+                );
+                $user = User::where('name', $rows[0][$i][0])->update($array);
+            }
+
+        }
     }
 
 

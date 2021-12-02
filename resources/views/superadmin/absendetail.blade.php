@@ -3,6 +3,15 @@
 @section('content')
     <div class="page-wrapper">
         <div class="container-fluid">
+            <h1 class="mb-1">
+                @php    
+                    $string = strtoupper($ibadah);
+                    echo ($string);
+                @endphp
+            </h1>
+            <h5 class="mb-5">
+                {{$tanggal}}
+            </h5>
            <table class="table table-striped">
                 <thead>
                     <th>No</th>
@@ -17,7 +26,7 @@
                             <tr>
                                 <td>{{$i}}</td>
                                 <td>{{$user->name}}</td>
-                                <td>{{$user->telepon}}</td>
+                                <td>{{$user->nomor_telepon}}</td>
                                 <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
                             </tr>
                             <?php $i++?>

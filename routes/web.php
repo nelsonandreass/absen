@@ -31,9 +31,16 @@ Route::group(['middleware' => ['authweb']],function(){
 });
 
 route::get('/count' ,  function(){
-    $count = User::whereRaw('LENGTH(kartu) >= 7')->count();
+    $array = array();
+    $count = User::count();
     dd($count);
 });
+
+
+route::get('/uploadkartu','SuperAdminController@uploadkartu');
+
+route::post('/uploadkartuprocess','SuperAdminController@uploadkartuprocess');
+
 
 
 Route::group(['middleware' => 'role'],function(){
