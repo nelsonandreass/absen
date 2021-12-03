@@ -66,7 +66,6 @@ class SuperAdminController extends Controller
             $data->save();
             $user = Absen::with(['users'])->where('user_id',$checkUser['kartu'])->first();
             
-            //var_dump($user);
            
             foreach($user->users as $userdata){
                 $response = array(
@@ -92,26 +91,14 @@ class SuperAdminController extends Controller
         return view('superadmin.absendetail' , ['datas' => $datas, 'ibadah' => $ibadah , 'tanggal' => $tanggal]);
     }
 
-        //tidak di pakai
-        // public function buatIbadah(Request $request){
-        //     $jenis = $request->input('jenis');
-        //     $data = new Ibadah();
-        //     $data->jenis_ibadah = $jenis;
-        //     $data->save();
-        //     return redirect('/absen')->with('jenis' , $jenis);
-        // }
-
-        // public function absen(){
-
-        //     $jenis = session()->get('jenis');
-        //     return view('superadmin.absen' , ['jenis' => $jenis]);
-        // }
-
+      
     //end of absen
 
     //jemaat
     public function listjemaat(){
-        $users = User::where('role' , 'user')->orderBy('name','asc')->paginate(50);
+        //$users = User::where('role' , 'user')->orderBy('name','asc')->paginate(50);
+        $users = User::where('role' , 'user')->orderBy('name','asc')->get();
+
         return view('superadmin.listjemaat' , ['users' => $users, 'json' => json_encode($users)]);
     }
 
@@ -135,7 +122,7 @@ class SuperAdminController extends Controller
 
         if(!is_null($foto)){
             //$namafoto = $foto->getClientOriginalName();
-            $namafoto = $name . $foto->getClientOriginalExtension();
+            $namafoto = $name.'.' . $foto->getClientOriginalExtension();
             $save = Storage::putFileAs('public',$foto, $namafoto);
             $array = array(
                 'email' => $email,
@@ -304,6 +291,7 @@ class SuperAdminController extends Controller
     public function uploadkartu(){
         return view('superadmin.uploadkartu');
     }
+
     public function uploadkartuprocess(Request $request){
         $excel = $request->file('excel');
         $rows = Excel::toArray(new UsersImport,$excel);
