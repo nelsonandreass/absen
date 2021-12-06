@@ -57,25 +57,39 @@ class SuperAdminController extends Controller
       
         $response;
         if(!is_null($checkUser)){
-            $data = new Absen();
-            $data->ibadah_id = $ibadah_id;
-            $data->user_id = $checkUser['kartu'];
-            $data->user_name = $user_name;
-            $data->jenis = $jenis;
-            $data->tanggal = $date;
-            $data->save();
-            $user = Absen::with(['users'])->where('user_id',$checkUser['kartu'])->first();
-            
-           
-            foreach($user->users as $userdata){
+            $checkAbsen = Absen::where('user_id', $checkUser['kartu'])->where('tanggal' , $date)->first();
+            if(is_null($checkAbsen)){
+                $data = new Absen();
+                $data->ibadah_id = $ibadah_id;
+                $data->user_id = $checkUser['kartu'];
+                $data->user_name = $user_name;
+                $data->jenis = $jenis;
+                $data->tanggal = $date;
+                $data->save();
+                $user = Absen::with(['users'])->where('user_id',$checkUser['kartu'])->first();
+                
+               
+                foreach($user->users as $userdata){
+                    $response = array(
+                        "error_code" => '0000',
+                        "error_message" => "Success",
+                        "name" => $userdata->name,
+                        "foto" => $userdata->foto,
+                        "greet" => "Selamat Beribadah"
+                    );
+                }
+            }
+            else{
                 $response = array(
-                    "error_code" => '0000',
-                    "error_message" => "Success",
-                    "name" => $userdata->name,
-                    "foto" => $userdata->foto,
-                    "greet" => "Selamat Beribadah"
+                    "error_code" => '0001',
+                    "error_message" => "Failed",
+                    // "name" => $userdata->name,
+                    // "foto" => $userdata->foto,
+                    "greet" => "Sudah Absen"
                 );
             }
+           
+            
         }
         else{
             $response = array(
@@ -97,6 +111,7 @@ class SuperAdminController extends Controller
     //jemaat
     public function listjemaat(){
         //$users = User::where('role' , 'user')->orderBy('name','asc')->paginate(50);
+        //$users = User::where('role' , 'user')->where('name' , 'LIKE' , 'o%')->orderBy('name','asc')->get();
         $users = User::where('role' , 'user')->orderBy('name','asc')->get();
 
         return view('superadmin.listjemaat' , ['users' => $users, 'json' => json_encode($users)]);

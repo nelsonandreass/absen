@@ -16,11 +16,12 @@ Route::resource('/loginadmin' , 'AdminLoginController');
 Route::resource('/registeradmin' , 'AdminRegisterController');
 Route::get('/logout' , 'LogoutController@logout');
 Route::get('/get' ,'LogoutController@check' );
-Route::group(['middleware' => ['checklogin']],function(){
-    Route::resource('/login' ,'LoginController');
-    Route::resource('/register' ,'RegisterController');
-});
-
+// Route::group(['middleware' => ['checklogin']],function(){
+//     Route::resource('/login' ,'LoginController');
+//     Route::resource('/register' ,'RegisterController');
+// });
+Route::resource('/login' ,'LoginController');
+Route::resource('/register' ,'RegisterController');
 
 
 Route::group(['middleware' => ['authweb']],function(){
@@ -31,9 +32,12 @@ Route::group(['middleware' => ['authweb']],function(){
 });
 
 route::get('/count' ,  function(){
-    $array = array();
-    $count = User::count();
-    dd($count);
+    //$count = User::whereRaw('LENGTH(kartu) >= 7')->count();
+    $count = User::where('foto' , '!=' , null)->count();
+    $countnull = User::where('foto' ,  null)->count();
+    var_dump($count);
+    var_dump($countnull);
+
 });
 
 

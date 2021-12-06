@@ -19,7 +19,14 @@
     <!-- <link href="{{asset('superadmin/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet"> -->
     <!-- Custom CSS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+    <!-- poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- roboto -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
     <link href="{{asset('superadmin/dist/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('dist/css/custom.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

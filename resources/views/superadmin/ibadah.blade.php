@@ -128,7 +128,7 @@
                         else if(data.error_code != '0000'){
                             $("#userid").val("");
                             $("#userid").focus();
-                            $("#greeting").text("Tidak terdaftar");
+                            $("#greeting").text(data.greet);
                             $("#greeting").show();
                             setInterval(function(){
                                 $("#greeting").hide();
