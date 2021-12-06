@@ -94,14 +94,15 @@ class SuperAdminController extends Controller
         else{
             $response = array(
                 "error_code" => '0001',
-                "error_message" => "tidak terdaftar"
+                "error_message" => "tidak terdaftar",
+                "greet" => "Tidak Terdaftar"
             );
         }
         return json_encode($response);
     }
 
     public function absenDetail($ibadah,$tanggal){
-        $datas = Absen::with('users')->where('jenis',$ibadah)->where('tanggal',$tanggal)->get();
+        $datas = Absen::with('users')->select('user_id','jenis','tanggal')->where('jenis',$ibadah)->where('tanggal',$tanggal)->get();
         return view('superadmin.absendetail' , ['datas' => $datas, 'ibadah' => $ibadah , 'tanggal' => $tanggal]);
     }
 
@@ -112,13 +113,13 @@ class SuperAdminController extends Controller
     public function listjemaat(){
         //$users = User::where('role' , 'user')->orderBy('name','asc')->paginate(50);
         //$users = User::where('role' , 'user')->where('name' , 'LIKE' , 'o%')->orderBy('name','asc')->get();
-        $users = User::where('role' , 'user')->orderBy('name','asc')->get();
+        $users = User::where('role' , 'user')->select('id','name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto')->orderBy('name','asc')->get();
 
         return view('superadmin.listjemaat' , ['users' => $users, 'json' => json_encode($users)]);
     }
 
     public function showjemaat($id){
-        $data = User::find($id);
+        $data = User::select('id' , 'name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto' ,'tempat_lahir' , 'email')->find($id);
 
         return view('superadmin.showjemaat' , ['datas' => $data]);
     }
