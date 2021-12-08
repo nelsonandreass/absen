@@ -100,7 +100,7 @@
                                 <!-- title -->
                             </div>
                             <div class="table-responsive">
-                                <table class="table v-middle">
+                                <table class="table v-middle table-striped">
                                     <thead>
                                         <tr class="bg-light">
                                             <th class="border-top-0">No</th>

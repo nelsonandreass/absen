@@ -6,6 +6,10 @@
 @section('content') 
     <div class="page-wrapper">
         <div class="container-fluid">
+            <div class="col-2">
+                <a href="" class="btn btn-secondary"><span class="mdi mdi-account-multiple-plus"> Tambah Jemaat</span></a>
+            </div>
+            
                 <!-- <div class="row">
                     <div class="col-4">
                         <input type="input" class="form-control rounded" placeholder="Search" id="search"  autocomplete="off"/>

@@ -1,7 +1,7 @@
 @extends('layout.layoutsuperadmin')
 
 @section('content')
-<div class="page-wrapper">  
+<div class="page-wrapper p-3">  
     <div class="row">
         <!-- column -->
         <div class="col-12">
@@ -18,7 +18,7 @@
                     <!-- title -->
                 </div>
                 <div class="table-responsive">
-                    <table class="table v-middle">
+                    <table class="table v-middle table-striped">
                         <thead>
                             <tr class="bg-light">
                                 <th class="border-top-0">No</th>

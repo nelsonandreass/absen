@@ -22,7 +22,7 @@ class SuperAdminController extends Controller
     
     public function index(){
         $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
-        $absens = Absen::select('jenis','tanggal')->orderBy('tanggal','DESC')->distinct('tanggal','jenis')->take('6')->get();
+        $absens = Absen::select('jenis','tanggal')->orderBy('tanggal','DESC')->distinct('tanggal','jenis')->take('5')->get();
        
         //$absens = DB::table('absens')->select('tanggal',DB::raw('count(id) as total'))->orderBy('tanggal','asc')->groupBy('tanggal')->get();
       
@@ -57,7 +57,7 @@ class SuperAdminController extends Controller
       
         $response;
         if(!is_null($checkUser)){
-            $checkAbsen = Absen::where('user_id', $checkUser['kartu'])->where('tanggal' , $date)->first();
+            $checkAbsen = Absen::where('user_id', $checkUser['kartu'])->where('jenis' , $jenis)->where('tanggal' , $date)->first();
             if(is_null($checkAbsen)){
                 $data = new Absen();
                 $data->ibadah_id = $ibadah_id;
@@ -312,18 +312,16 @@ class SuperAdminController extends Controller
         $excel = $request->file('excel');
         $rows = Excel::toArray(new UsersImport,$excel);
 
+       
         
         for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
             
-         
+            $user = new User();
+            $user->name = $rows[0][$i][0];
+            $user->kartu = $rows[0][$i][3];
+            $user->save();
 
-            if(!is_null($rows[0][$i][3])){
-                $array = array(
-                    'kartu' => $rows[0][$i][3]
-                );
-                $user = User::where('name', $rows[0][$i][0])->update($array);
-            }
-
+           
         }
     }
 

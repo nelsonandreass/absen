@@ -1,39 +1,65 @@
 @extends('layout.layoutsuperadmin')
 
 @section('content')
-    <div class="page-wrapper">
-        <div class="container-fluid">
-            <h1 class="mb-1">
-                @php    
-                    $string = strtoupper($ibadah);
-                    echo ($string);
-                @endphp
-            </h1>
-            <h5 class="mb-5">
-                {{$tanggal}}
-            </h5>
-           <table class="table table-striped">
-                <thead>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>No Telepon</th>
-                    <th>Foto</th>
-                </thead>
-                <tbody>
-                    <?php $i = 1?>
-                    @foreach($datas as $data)
-                        @foreach($data->users as $user)
-                            <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->nomor_telepon}}</td>
-                                <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
-                            </tr>
-                            <?php $i++?>
-                        @endforeach
-                    @endforeach
-                </tbody>
-           </table> 
+
+    <div class="page-wrapper p-3">  
+        <div class="row">
+            <!-- column -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- title -->
+                        <div class="d-md-flex">
+                            <div>
+                                <h1>
+                                    @php    
+                                        $string = strtoupper($ibadah);
+                                        echo ($string);
+                                    @endphp
+                                </h1>
+                                <h2>
+                                    {{$tanggal}}
+                                </h2>
+                            </div>
+                            
+                        </div>
+                        <!-- title -->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table v-middle table-striped">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th class="border-top-0">No</th>
+                                    <th class="border-top-0">Ibadah</th>
+                                    <th class="border-top-0">Tanggal</th>
+                                    <th class="border-top-0">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1;?>
+                                @foreach($datas as $data)
+                                    @foreach($data->users as $user)
+                                        <tr>
+                                            <td>{{$i}}</td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->nomor_telepon}}</td>
+                                            <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
+                                        </tr>
+                                        <?php $i++?>
+                                    @endforeach
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    
+                        
+                    </div>
+                    <div class="row">
+                    
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 @endsection
