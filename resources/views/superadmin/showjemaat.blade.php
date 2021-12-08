@@ -49,10 +49,28 @@
                     <input type="text" class="form-control" name="nokartu"  value="{{$datas->kartu}}">
                     </div>
                 </div>
+                @php    
+
+                    if(is_null($datas->foto)){
+                        echo ('
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Foto</label>
+                            <div class="col-sm-10">
+                            <input type="file" class="form-control" name="foto">
+                            </div>
+                        </div>
+                        ');
+                      
+
+                    }
+                    
+
+                @endphp
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">Foto</label>
-                    <div class="col-sm-10">
-                    <input type="file" class="form-control" name="foto" value="{{$datas->foto}}">
+                    <div class="col-sm-10 h-50">
+                        <img class="col-12 no-absen " style="width: 15%;<?php if(!is_null($datas->foto ) ?  'display: block;' : 'display: none;' )?>" src="{{asset('storage/'.$datas->foto)}}" id="foto-jemaat" alt="{{$datas->foto}}">
+
                     </div>
                 </div>
                 <div class="row">

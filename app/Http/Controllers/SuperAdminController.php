@@ -119,7 +119,7 @@ class SuperAdminController extends Controller
     }
 
     public function showjemaat($id){
-        $data = User::select('id' , 'name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto' ,'tempat_lahir' , 'email')->find($id);
+        $data = User::select('id' , 'name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto' ,'tempat_lahir', 'tanggal_lahir' , 'email' , 'foto')->find($id);
 
         return view('superadmin.showjemaat' , ['datas' => $data]);
     }
@@ -315,11 +315,12 @@ class SuperAdminController extends Controller
        
         
         for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
-            
-            $user = new User();
-            $user->name = $rows[0][$i][0];
-            $user->kartu = $rows[0][$i][3];
-            $user->save();
+            if(!is_null($rows[0][$i][3])){
+                $array = array(
+                    'kartu' => $rows[0][$i][3]
+                );
+                $user = User::where('name', $rows[0][$i][0])->update($array);
+            }
 
            
         }

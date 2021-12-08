@@ -33,8 +33,10 @@ Route::group(['middleware' => ['authweb']],function(){
 
 route::get('/count' ,  function(){
     //$count = User::whereRaw('LENGTH(kartu) >= 7')->count();
-    $count = User::where('foto' , '!=' , null)->count();
-    $countnull = User::where('foto' ,  null)->count();
+    $countuser = User::count();
+    $count = User::where('kartu' , '!=' , null)->count();
+    $countnull = User::where('kartu' ,  null)->count();
+    var_dump($countuser);
     var_dump($count);
     var_dump($countnull);
 
@@ -45,11 +47,13 @@ route::get('/uploadkartu','SuperAdminController@uploadkartu');
 
 route::post('/uploadkartuprocess','SuperAdminController@uploadkartuprocess');
 
-
+route::get('/deleteuser' , function(){
+    User::where('id' , '>=' , 453)->delete();
+});
 
 Route::group(['middleware' => 'role'],function(){
     //home
-    Route::get('/super' , 'SuperAdminController@index');
+    Route::get('/adminhome' , 'SuperAdminController@index');
     Route::get('/allabsen' , 'SuperAdminController@getAllAbsen');
     //absen
     Route::get('/ibadah' , 'SuperAdminController@ibadah');
