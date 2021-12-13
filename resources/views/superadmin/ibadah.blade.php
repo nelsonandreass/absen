@@ -103,7 +103,7 @@
                 if(userid.length >= 7){
                     var http = new XMLHttpRequest();
                     var url = '/absenprocess';
-                    var params = 'ibadah_id=1&user_id='+userid+'&jenis='+$("#option-ibadah").val()+'&_token={{csrf_token()}}';
+                    var params = 'user_id='+userid+'&jenis='+$("#option-ibadah").val()+'&_token={{csrf_token()}}';
                     http.open('POST', url, true);
                     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                     http.send(params);

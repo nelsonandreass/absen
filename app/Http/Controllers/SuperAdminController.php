@@ -45,7 +45,6 @@ class SuperAdminController extends Controller
     }
 
     public function absenProcess(Request $request){
-        $ibadah_id = $request->input('ibadah_id');
         $user_id = $request->input('user_id');
         $user_name = $request->input('user_name');
         $jenis = $request->input('jenis');
@@ -60,7 +59,6 @@ class SuperAdminController extends Controller
             $checkAbsen = Absen::where('user_id', $checkUser['kartu'])->where('jenis' , $jenis)->where('tanggal' , $date)->first();
             if(is_null($checkAbsen)){
                 $data = new Absen();
-                $data->ibadah_id = $ibadah_id;
                 $data->user_id = $checkUser['kartu'];
                 $data->user_name = $user_name;
                 $data->jenis = $jenis;
@@ -83,8 +81,6 @@ class SuperAdminController extends Controller
                 $response = array(
                     "error_code" => '0001',
                     "error_message" => "Failed",
-                    // "name" => $userdata->name,
-                    // "foto" => $userdata->foto,
                     "greet" => "Sudah Absen"
                 );
             }
@@ -112,14 +108,15 @@ class SuperAdminController extends Controller
     //jemaat
     public function listjemaat(){
         //$users = User::where('role' , 'user')->orderBy('name','asc')->paginate(50);
-        //$users = User::where('role' , 'user')->where('name' , 'LIKE' , 'o%')->orderBy('name','asc')->get();
+        //$users = User::where('role' , 'user')->where('name' , 'LIKE' , 'y%')->orderBy('name','asc')->get();
         $users = User::where('role' , 'user')->select('id','name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto')->orderBy('name','asc')->get();
 
+      
         return view('superadmin.listjemaat' , ['users' => $users, 'json' => json_encode($users)]);
     }
 
     public function showjemaat($id){
-        $data = User::select('id' , 'name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto' ,'tempat_lahir', 'tanggal_lahir' , 'email' , 'foto')->find($id);
+        $data = User::select('id' , 'name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto' ,'tempat_lahir', 'status_pernikahan', 'tanggal_lahir', 'jenis_kelamin' , 'email' , 'foto')->find($id);
 
         return view('superadmin.showjemaat' , ['datas' => $data]);
     }
@@ -131,6 +128,8 @@ class SuperAdminController extends Controller
         $alamat = $request->input('alamat');
         $nokartu = $request->input('nokartu');
         $tanggallahir = $request->input('tgllahir');
+        $status_pernikahan = $request->input('status_pernikahan');
+
         $tempatlahir = $request->input('tempatlahir');
         $name = $request->input('name');
         $foto = $request->file('foto');
@@ -147,7 +146,8 @@ class SuperAdminController extends Controller
                 'kartu' => $nokartu,
                 'foto' => $namafoto,
                 'tanggal_lahir' => $tanggallahir,
-                'tempat_lahir' => $tempatlahir
+                'tempat_lahir' => $tempatlahir,
+                'status_pernikahan' => $status_pernikahan
             );
         }
         else{
@@ -157,7 +157,8 @@ class SuperAdminController extends Controller
                 'alamat' => $alamat,
                 'kartu' => $nokartu,
                 'tanggal_lahir' => $tanggallahir,
-                'tempat_lahir' => $tempatlahir
+                'tempat_lahir' => $tempatlahir,
+                'status_pernikahan' => $status_pernikahan
             );
         }
         
@@ -259,29 +260,11 @@ class SuperAdminController extends Controller
 
         
         for($i = 0 ; $i < sizeof($rows[0]) ; $i++){
-            //$user = new User();
-            // if(!is_null($rows[0][$i][6])){
-            //     $ttl = explode("," , $rows[0][$i][6]);
-            // }
-            // // $user->name = $rows[0][$i][1];
-            // // $user->kartu = $rows[0][$i][4];
-            // $user->email = $rows[0][$i][0].$ttl[1].'@gmail.com';
-            // $user->password = $rows[0][$i][0];
-            // $user->jenis_kelamin = $rows[0][$i][4];
-            // $user->status_pernikahan = $rows[0][$i][5];
-            // $user->alamat = $rows[0][$i][7];
-            // if(!is_null($rows[0][$i][6])){
-            //     $user->tanggal_lahir = $ttl[1];
-            //     $user->tempat_lahir = $ttl[0];
-            // }
-            // $user->nomor_telepon = $rows[0][$i][8];
-            // $user->save();
-
+           
             if(!is_null($rows[0][$i][6])){
                 $ttl = explode("," , $rows[0][$i][6]);
             }
-            //$newDate = date('Y-m-d',$ttl[1]);
-           
+       
             
             $user = new User();
             $user->name = $rows[0][$i][0];

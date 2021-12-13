@@ -14,6 +14,18 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                    <div class="col-sm-10">
+                    <input type="text" readonly class="form-control" name="jenis_kelamin" value="{{$datas->jenis_kelamin}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Status Pernikahan</label>
+                    <div class="col-sm-10">
+                    <input type="text"  class="form-control" name="status_pernikahan" value="{{$datas->status_pernikahan}}">
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">Tempat Lahir</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" value="{{$datas->tempat_lahir}}" name="tempatlahir">
@@ -66,10 +78,10 @@
                     
 
                 @endphp
-                <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Foto</label>
+                <div class="form-group row" style="">
+                    <label for="" class="col-sm-2 col-form-label" style="<?php if(!is_null($datas->foto ) ?  print('display: block;') : print('display: none;') )?>">Foto</label>
                     <div class="col-sm-10 h-50">
-                        <img class="col-12 no-absen " style="width: 15%;<?php if(!is_null($datas->foto ) ?  'display: block;' : 'display: none;' )?>" src="{{asset('storage/'.$datas->foto)}}" id="foto-jemaat" alt="{{$datas->foto}}">
+                        <img class="col-12 no-absen " style="width: 15%;<?php if(!is_null($datas->foto ) ?  print('display: block;') : print('display: none;') )?>" src="{{asset('storage/'.$datas->foto)}}" id="foto-jemaat" alt="{{$datas->foto}}">
 
                     </div>
                 </div>

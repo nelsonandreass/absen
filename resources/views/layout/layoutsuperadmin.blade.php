@@ -181,9 +181,9 @@
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="{{url('/listjemaat')}}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
                                         class="hide-menu">Jemaat</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="{{url('/berita')}}" aria-expanded="false"><i class="mdi mdi-tooltip-edit"></i><span
-                                        class="hide-menu">Berita</span></a></li>
+                                        class="hide-menu">Berita</span></a></li> -->
                         </div>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="icon-material.html" aria-expanded="false"><i class="mdi mdi-face"></i><span
