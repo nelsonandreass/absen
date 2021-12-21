@@ -7,7 +7,7 @@
     <div class="page-wrapper">
         <div class="container-fluid">
             <div class="col-2">
-                <a href="" class="btn btn-secondary"><span class="mdi mdi-account-multiple-plus"> Tambah Jemaat</span></a>
+                <a href="/jemaatbaru" class="btn btn-secondary"><span class="mdi mdi-account-multiple-plus"> Tambah Jemaat</span></a>
             </div>
             
                 <!-- <div class="row">

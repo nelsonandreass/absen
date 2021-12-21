@@ -179,6 +179,13 @@ class SuperAdminController extends Controller
         }
         return json_encode($response);
     }
+
+    public function jemaatbaru(){
+        return view('superadmin.jemaatbaru');
+    }
+    public function simpanjemaatbaru(Request $request){
+        
+    }
     //end of jemaat
 
     //berita

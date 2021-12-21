@@ -68,6 +68,9 @@ Route::group(['middleware' => 'role'],function(){
     Route::get('/showjemaat/{id}' , 'SuperAdminController@showjemaat' );
     Route::post('/update/jemaat' , 'SuperAdminController@updatejemaat');
     Route::post('/searchjemaat' , 'SuperAdminController@searchJemaat');
+    Route::get('/jemaatbaru' , 'SuperAdminController@jemaatbaru');
+    Route::post('/savejemaatbaru' , 'SuperAdminController@savejemaatbaru');
+
 
     //berita
     Route::get('/berita' , 'SuperAdminController@berita');
