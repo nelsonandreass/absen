@@ -6,53 +6,56 @@
 @section('content') 
     <div class="page-wrapper">
         <div class="container-fluid">
-            <div class="col-2">
-                <a href="/jemaatbaru" class="btn btn-secondary"><span class="mdi mdi-account-multiple-plus"> Tambah Jemaat</span></a>
-            </div>
-            
-                <!-- <div class="row">
-                    <div class="col-4">
-                        <input type="input" class="form-control rounded" placeholder="Search" id="search"  autocomplete="off"/>
+           
+            <div class="card p-3">  
+                    <!-- <div class="row">
+                        <div class="col-4">
+                            <input type="input" class="form-control rounded" placeholder="Search" id="search"  autocomplete="off"/>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" class="btn btn-outline-primary">search</button>
+                        </div>
                     </div>
-                    <div class="col-1">
-                        <button type="button" class="btn btn-outline-primary">search</button>
-                    </div>
+                    <div class="row px-3" style="display:none" id="autocomplete">
+                        <div class="col-3 " style="height: 4rem; background-color:white; overflow-y: auto" id="data">
+
+
+                        </div>
+                    </div> -->
+                <div class="col-2 mb-3">
+                    <a href="/jemaatbaru" class="btn btn-secondary ml-auto"><span class="mdi mdi-account-multiple-plus"> Tambah Jemaat</span></a>
                 </div>
-                <div class="row px-3" style="display:none" id="autocomplete">
-                    <div class="col-3 " style="height: 4rem; background-color:white; overflow-y: auto" id="data">
 
-
-                    </div>
-                </div> -->
-           <table class="table table-striped">
-                <thead>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>No Telepon</th>
-                    <th>Alamat</th>
-                    <th>No Kartu</th>
-                    <th>Foto</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    <?php $i = 1?>
-                    @foreach($users as $user)
-                        <tr>
-                            <td>{{$i}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->nomor_telepon}}</td>
-                            <td>{{$user->alamat}}</td>
-                            <td>{{$user->kartu}}</td>
-                            <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
-                            <td>
-                                <a href="{{url('/showjemaat', $user->id)}}" class="btn btn-primary">Edit</a>
-                            </td>
-                        </tr>
-                        <?php $i++?>
-                    @endforeach
-                </tbody>
-           </table> 
-           <!-- //  $users->links()  -->
+                <table class="table table-striped">
+                        <thead>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>No Telepon</th>
+                            <th>Alamat</th>
+                            <th>No Kartu</th>
+                            <th>Foto</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1?>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td>{{$i}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->nomor_telepon}}</td>
+                                    <td>{{$user->alamat}}</td>
+                                    <td>{{$user->kartu}}</td>
+                                    <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
+                                    <td>
+                                        <a href="{{url('/showjemaat', $user->id)}}" class="btn btn-primary">Edit</a>
+                                    </td>
+                                </tr>
+                                <?php $i++?>
+                            @endforeach
+                        </tbody>
+                </table> 
+                {{$users->links()}} 
+            </div>
         </div>
     </div>
     <script>

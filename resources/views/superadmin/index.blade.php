@@ -1,7 +1,7 @@
 @extends('layout.layoutsuperadmin')
 
 @section('content')
-    <div class="page-wrapper">
+    <div class="page-wrapper ">
             <!-- <div class="page-breadcrumb">
                 <div class="row align-items-center">
                     <div class="col-5">
@@ -21,7 +21,7 @@
                 </div>
             </div> -->
             
-            <div class="container-fluid">
+            <div class="container-fluid ml-5">
                 <!-- ============================================================== -->
                 <!-- Sales chart -->
                 <!-- ============================================================== -->
@@ -87,7 +87,7 @@
                 <div class="row">
                     <!-- column -->
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card px-3">
                             <div class="card-body">
                                 <!-- title -->
                                 <div class="d-md-flex">

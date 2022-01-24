@@ -1,8 +1,10 @@
 @extends('layout.layoutsuperadmin')
 
 @section('content')
+   
     <div class="page-wrapper">
         <div class="container-fluid" id="container-fluid">
+           
             <center>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
@@ -23,7 +25,7 @@
                    <center id="absen" style="display:none;">
                         <div class="row">
                             <center>
-                                <h2 id="jenis" class="mb-2" style="display:none;"></h2>
+                                <h2 id="jenis" class="mb-2 font-weight-bold" style="display:none;"></h2>
                             </center>
                             <center>
                                 <h4 id="greeting" class="mt-2" style="display:none;"></h4>
@@ -80,10 +82,10 @@
                     $("#userid").focus();
                     $("#jenis").show();
                     if(jenisibadah == 'ibadah1'){
-                        $("#jenis").text("IBADAH 1");
+                        $("#jenis").text("Ibadah 1");
                     }
                     else if(jenisibadah == "ibadah2"){
-                        $("#jenis").text("IBADAH 2");
+                        $("#jenis").text("Ibadah 2");
                     }
                     else if(jenisibadah == "bic"){
                         $("#jenis").text("BIC");
@@ -122,7 +124,7 @@
                                 var foto = '/assets/img/user-black.png';
                                 $("#foto-jemaat").attr("src",foto);
                                 $("#greeting").hide();
-                            }, 4000);
+                            }, 5000);
                             
                         }
                         else if(data.error_code != '0000'){
@@ -132,22 +134,9 @@
                             $("#greeting").show();
                             setInterval(function(){
                                 $("#greeting").hide();
-                            }, 4000);
+                            }, 5000);
                         }
-                        // if(http.readyState == 4 && http.status == 200) {
-                        //     $("#userid").val("");
-                        //     $("#userid").focus();
-                        //     var data= JSON.parse(http.responseText);
-                        //     var foto = '/storage/'+data.foto;
-                        //     $("#foto-jemaat").attr("src",foto);
-                        //     $("#greeting").text("Selamat Beribadah " + data.name);
-                        //     $("#greeting").show();
-                        //     setInterval(() => {
-                        //         var foto = '/assets/img/user-black.png';
-                        //         $("#foto-jemaat").attr("src",foto);
-                        //         $("#greeting").hide();
-                        //     }, 4000);
-                        // }
+                      
                     }
                     
                    

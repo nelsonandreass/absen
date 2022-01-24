@@ -24,8 +24,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <!-- roboto -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> -->
 
     <link href="{{asset('superadmin/dist/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('dist/css/custom.css')}}">
@@ -125,7 +125,7 @@
                 </div>
             </nav>
         </header>
-        <aside class="left-sidebar" id="left-sidebar" data-sidebarbg="skin6">
+        <aside class="left-sidebar" style="z-index:" id="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" id="scroll-sidebar">
                 <!-- Sidebar navigation-->
@@ -137,42 +137,12 @@
                             href="" aria-expanded="false"><i class="mdi mdi-close"></i></a></li>
                         <li class="sidebar-item " id="id-close"  style="display:none;"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                             href="" aria-expanded="false"><i class="mdi mdi-menu"></i></a></li>
-                        <!-- <div class="position-relative">
-                            <div class="mdi mdi-close ml-3 mt-3" id="arrow-left" onclick="hideleft()"> </div>
-                            <div class="mdi mdi-menu ml-3 mt-3" id="arrow-right" onclick="showleft()" style="display:none;"> </div>
-                        </div> -->
-                            <!-- User Profile-->
-                            <!-- <div class="user-profile d-flex no-block dropdown m-t-20">
-                                
-                                <div class="user-content hide-menu m-l-10">
-                                    <a href="#" class="" id="Userdd" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <h5 class="m-b-0 user-name font-medium">{{Auth::user()->name}} <i
-                                                class="fa fa-angle-down"></i></h5>
-                                        <span class="op-5 user-email">{{Auth::user()->email}}</span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Userdd">
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-email m-r-5 m-l-5"></i> Inbox</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{{route('login.create')}}"><i
-                                                class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- End User Profile-->
+                      
                         </li>
                         
-                        <!-- User Profile-->
+                        
                         <div id="wrapper-sidebar">
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="{{url('/adminhome')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -181,26 +151,33 @@
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="{{url('/listjemaat')}}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
                                         class="hide-menu">Jemaat</span></a></li>
-                            <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="{{url('/berita')}}" aria-expanded="false"><i class="mdi mdi-tooltip-edit"></i><span
-                                        class="hide-menu">Berita</span></a></li> -->
+                             -->
+                             <li class="sidebar-item"> 
+                                 <a class="sidebar-link waves-effect waves-dark " href="{{url('/adminhome')}}" aria-expanded="false"><img class="col-1" src="{{asset('/assets/img/011-house-black.png')}}"></img>
+                                 <span class="hide-menu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</span>
+                                </a> 
+                            </li>
+                            <li class="sidebar-item"> 
+                                 <a class="sidebar-link waves-effect waves-dark " href="{{url('/ibadah')}}" aria-expanded="false"><img class="col-1" src="{{asset('/assets/img/050-edition-black.png')}}"></img>
+                                 <span class="hide-menu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absen</span>
+                                </a> 
+                            </li>
+                            <li class="sidebar-item"> 
+                                 <a class="sidebar-link waves-effect waves-dark " href="{{url('/listjemaat')}}" aria-expanded="false"><img class="col-1" src="{{asset('/assets/img/user-black.png')}}"></img>
+                                 <span class="hide-menu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jemaat </span> 
+                                </a> 
+                               
+                            </li>
+                         
                         </div>
-                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-material.html" aria-expanded="false"><i class="mdi mdi-face"></i><span
-                                    class="hide-menu">Icon</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="starter-kit.html" aria-expanded="false"><i class="mdi mdi-file"></i><span
-                                    class="hide-menu">Blank</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="error-404.html" aria-expanded="false"><i class="mdi mdi-alert-outline"></i><span
-                                    class="hide-menu">404</span></a></li> -->
+                      
                         
                     </ul>
 
                 </nav>
-                <!-- End Sidebar navigation -->
+               
             </div>
-            <!-- End Sidebar scroll-->
+            
         </aside>
         @yield('content')
     </div>
