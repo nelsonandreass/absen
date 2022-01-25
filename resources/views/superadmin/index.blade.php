@@ -25,30 +25,25 @@
                 <!-- ============================================================== -->
                 <!-- Sales chart -->
                 <!-- ============================================================== -->
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-md-flex align-items-center">
-                                    <div>
-                                        <h4 class="card-title">Sales Summary</h4>
-                                        <h5 class="card-subtitle">Overview of Latest Month</h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        Tarik data
                                     </div>
-                                    <div class="ms-auto d-flex no-block align-items-center">
-                                        <ul class="list-inline font-12 dl m-r-15 m-b-0">
-                                            <li class="list-inline-item text-info"><i class="fa fa-circle"></i> Iphone
-                                            </li>
-                                            <li class="list-inline-item text-primary"><i class="fa fa-circle"></i> Ipad
-                                            </li>
-                                        </ul>
+                                    <input type="hidden" id="tanggal" value={{$tanggal}}>
+                                    <div class="col-md-2">
+                                        <a href="{{url('/tarikdata')}}"class="">Detail</a>
                                     </div>
                                 </div>
+                                    
                                 <div class="row">
-                                    
-                                    <div class="col-lg-12">
-                                        <div class="campaign ct-charts"></div>
+                                    <div>
+                                        <canvas id="myChart"></canvas>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -77,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <!-- ============================================================== -->
                 <!-- Sales chart -->
                 <!-- ============================================================== -->
@@ -274,4 +269,46 @@
             </div>
            
     </div>
+@endsection
+
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var tanggal = document.getElementById('tanggal').value;
+    tanggal = tanggal.replace('[','');
+    tanggal = tanggal.replace(']','');
+    var tanggalsplit = tanggal.split(',');
+    console.log(tanggalsplit[0]);
+  const labels = tanggalsplit;
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Ibadah 1',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [0, 10, 5, 2, 20, 30, 45],
+    },
+    {
+      label: 'Ibadah 2',
+      backgroundColor: 'rgb(25, 99, 132)',
+      borderColor: 'rgb(25, 99, 132)',
+      data: [5, 11, 51, 21, 201, 301, 45],
+    }]
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {}
+  };
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
 @endsection

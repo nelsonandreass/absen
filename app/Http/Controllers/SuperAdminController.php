@@ -9,6 +9,8 @@ use App\User;
 use App\Absen;
 Use App\Ibadah;
 Use App\Berita;
+Use App\Counter;
+
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -23,10 +25,56 @@ class SuperAdminController extends Controller
     public function index(){
         $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
         $absens = Absen::select('jenis','tanggal')->orderBy('tanggal','DESC')->distinct('tanggal','jenis')->take('5')->get();
+        $arrayTanggal = array();
+
+        foreach($absens as $key => $absen){
+            array_push($arrayTanggal,$absen['tanggal']);
+        }
        
+      
         //$absens = DB::table('absens')->select('tanggal',DB::raw('count(id) as total'))->orderBy('tanggal','asc')->groupBy('tanggal')->get();
       
-        return view('superadmin.index' , ['beritas' => $beritas , 'absens' => $absens]);
+        return view('superadmin.index' , ['beritas' => $beritas , 'absens' => $absens, 'tanggal' => json_encode($arrayTanggal)]);
+    }
+
+    public function tarikDataPage(){
+        $getDate = Absen::select('tanggal')->orderBy('tanggal','DESC')->distinct('tanggal')->get();
+
+        return view('superadmin.tarikdata' , ['dates' => $getDate]);
+        // $absens = Absen::select('user_id')->orderBy('tanggal','DESC')->distinct('tanggal')->get();
+        // var_dump(json_encode($absens));
+        // die("");
+    }
+
+    public function tarikDataProcess(Request $request){
+        $date = $request->input("tanggal"); 
+
+        $getPeople = Absen::select('user_id')->where('tanggal' , $date)->get();
+        $getAllPeople = User::select('kartu')->get();
+
+        $tempArrayGetPeople = $getPeople->toArray();
+        $tempArrayGetAllPeople = $getAllPeople->toArray();
+        $arrayGetPeople = array();
+        $arrayGetAllPeople = array();
+        foreach($tempArrayGetAllPeople as $key => $dataPeople){
+           array_push($arrayGetAllPeople ,$dataPeople['kartu']);           
+        }
+        foreach($tempArrayGetPeople as $key => $dataAbsen){
+            //var_dump($dataAbsen['user_id']);
+            array_push($arrayGetPeople ,$dataAbsen['user_id']);           
+
+        }
+        
+        $arraydiff = array_diff($arrayGetAllPeople,$arrayGetPeople);
+        $notAbsen = User::select("name",'nomor_telepon','alamat')->whereIn('kartu',$arraydiff)->orWhere('kartu','=',null)->get();
+        //$isHaveCardNull = User::select("name",'nomor_telepon','alamat')->where('kartu','=',null)->get();
+        //$merge = array_merge($notAbsen, $notAbsen);
+        
+        dd($notAbsen);
+
+        die("");
+        // dd(json_decode($getAllPeople,true));
+        // die("");
     }
 
     public function getAllAbsen(){
@@ -41,7 +89,7 @@ class SuperAdminController extends Controller
 
     //absen
     public function ibadah(){
-        return view('superadmin.ibadah');
+        return view('superadmin.ibadah', ['tanggal' => date('Y-m-d')]);
     }
 
     public function absenProcess(Request $request){
@@ -102,6 +150,19 @@ class SuperAdminController extends Controller
         return view('superadmin.absendetail' , ['datas' => $datas, 'ibadah' => $ibadah , 'tanggal' => $tanggal]);
     }
 
+    public function selesaiProcess($jenis,$tanggal){
+
+        $count = Absen::where('jenis',$jenis)->where('tanggal',$tanggal)->count();
+       
+        $data = new Counter;
+        $data->jenis = $jenis;
+        $data->tanggal = $tanggal;
+        $data->jumlah = $count;
+
+        $data->save();
+
+        return redirect()->back();
+    }
       
     //end of absen
 

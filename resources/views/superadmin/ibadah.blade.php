@@ -13,7 +13,7 @@
                         @csrf
                         <label for="" class="text-center">Jenis Ibadah</label>
                         <select name="jenis" id="option-ibadah" class="form-control" onchange="change()">
-                            <option value="default" style="color: #DBDBDB">Pilih jenis ibadah......</option>    
+                            <option value="default" style="color: #DBDBDB">Pilih jenis ibadah...</option>    
                             <option value="ibadah1">Ibadah 1</option>
                             <option value="ibadah2">Ibadah 2</option>
                             <option value="bic">BIC</option>
@@ -23,6 +23,12 @@
                    </form>
 
                    <center id="absen" style="display:none;">
+                        <div class="row">
+                            <div class="col-10">&nbsp;</div>
+                            <div class="col-2">
+                                <a href="{{url('/selesai',['ibadah1',$tanggal])}}">Selesai</a>
+                            </div>
+                        </div>
                         <div class="row">
                             <center>
                                 <h2 id="jenis" class="mb-2 font-weight-bold" style="display:none;"></h2>
