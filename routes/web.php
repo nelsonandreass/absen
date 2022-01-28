@@ -63,7 +63,7 @@ Route::group(['middleware' => 'role'],function(){
     Route::get('/getabsen' , 'SuperAdminController@getAbsen');
     Route::get('/absen/{ibadah}/{tanggal}','SuperAdminController@absenDetail');
     Route::get('/tarikdata' , 'SuperAdminController@tarikDataPage');
-    Route::get('/tarikdataprocess' , 'SuperAdminController@tarikDataProcess');
+    Route::post('/tarikdataprocess' , 'SuperAdminController@tarikDataProcess');
     Route::get('/selesai/{jenis}/{tanggal}' , 'SuperAdminController@selesaiProcess');
     //jemaat
     Route::get('/listjemaat' , 'SuperAdminController@listjemaat');

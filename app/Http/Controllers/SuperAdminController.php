@@ -34,18 +34,12 @@ class SuperAdminController extends Controller
            
         }
         sort($arrayTanggal);
-        // var_dump($arrayTanggal);
-        // die("");
-
+      
         $ibadah1 = Counter::select('jumlah','tanggal')->where('jenis'  , 'ibadah1')->whereIn('tanggal' , $arrayTanggal)->get()->toJson();
         $jumlahIbadah1 = array();
         foreach(json_decode($ibadah1) as $data){
             array_push($jumlahIbadah1,$data->jumlah);
         }
-        // var_dump($jumlahIbadah1);
-        // //var_dump(json_decode($ibadah1));
-        // //var_dump(json_encode($ibadah1.TRUE));
-        // die("");
         $ibadah2 =  Counter::select('jumlah','tanggal')->where('jenis'  , 'ibadah2')->whereIn('tanggal' , $arrayTanggal)->get()->toJson();
         $jumlahIbadah2 = array();
         foreach(json_decode($ibadah2) as $data){
@@ -61,48 +55,42 @@ class SuperAdminController extends Controller
         $getDate = Absen::select('tanggal')->orderBy('tanggal','DESC')->distinct('tanggal')->get();
 
         return view('superadmin.tarikdata' , ['dates' => $getDate]);
-        // $absens = Absen::select('user_id')->orderBy('tanggal','DESC')->distinct('tanggal')->get();
-        // var_dump(json_encode($absens));
-        // die("");
+    
     }
 
     public function tarikDataProcess(Request $request){
         $date = $request->input("tanggal"); 
-
+       
         $getPeople = Absen::select('user_id')->where('tanggal' , $date)->get();
         $getAllPeople = User::select('kartu')->get();
 
+        
         $tempArrayGetPeople = $getPeople->toArray();
         $tempArrayGetAllPeople = $getAllPeople->toArray();
         $arrayGetPeople = array();
         $arrayGetAllPeople = array();
+
+      
         foreach($tempArrayGetAllPeople as $key => $dataPeople){
            array_push($arrayGetAllPeople ,$dataPeople['kartu']);           
         }
         foreach($tempArrayGetPeople as $key => $dataAbsen){
-            //var_dump($dataAbsen['user_id']);
             array_push($arrayGetPeople ,$dataAbsen['user_id']);           
 
         }
-        
+
         $arraydiff = array_diff($arrayGetAllPeople,$arrayGetPeople);
         $notAbsen = User::select("name",'nomor_telepon','alamat')->whereIn('kartu',$arraydiff)->orWhere('kartu','=',null)->get();
-        //$isHaveCardNull = User::select("name",'nomor_telepon','alamat')->where('kartu','=',null)->get();
-        //$merge = array_merge($notAbsen, $notAbsen);
-        
-        dd($notAbsen);
-
-        die("");
-        // dd(json_decode($getAllPeople,true));
-        // die("");
+        //dd($notAbsen);
+        return response([
+            'data' => $notAbsen
+        ]);
     }
 
     public function getAllAbsen(){
         $absens = Absen::select('jenis','tanggal')->distinct('tanggal','jenis')->orderBy('tanggal',"desc")->get();
         return view('superadmin.absen' , ['absens' => $absens]);
     }
-
-
 
     //end of home
 
@@ -120,7 +108,7 @@ class SuperAdminController extends Controller
 
         $cardshort = substr($user_id,1,strlen($user_id));
     
-        $checkUser = User::where('kartu','LIKE',"%$cardshort%")->first();
+        $checkUser = User::where('kartu','LIKE',"%$cardshort%")->orWhere('fingerprint','LIKE',"%$cardshort%")->first();
       
         $response;
         if(!is_null($checkUser)){
@@ -171,15 +159,23 @@ class SuperAdminController extends Controller
     }
 
     public function selesaiProcess($jenis,$tanggal){
-
         $count = Absen::where('jenis',$jenis)->where('tanggal',$tanggal)->count();
        
-        $data = new Counter;
-        $data->jenis = $jenis;
-        $data->tanggal = $tanggal;
-        $data->jumlah = $count;
-
-        $data->save();
+        if($count == 0){
+            $data = new Counter;
+            $data->jenis = $jenis;
+            $data->tanggal = $tanggal;
+            $data->jumlah = $count;
+    
+            $data->save();
+        }
+        else{
+            $dataUpdate = array(
+                'jumlah' => $count
+            );
+           Counter::where('jenis',$jenis)->where('tanggal',$tanggal)->update($dataUpdate);
+        }
+     
 
         return redirect()->back();
     }
