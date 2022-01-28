@@ -14,6 +14,12 @@
                                 <h1>
                                     @php    
                                         $string = strtoupper($ibadah);
+                                        if($string == 'IBADAH1'){
+                                            $string = 'IBADAH 1';
+                                        }
+                                        else if($string == 'IBADAH2'){
+                                            $string = 'IBADAH 2';
+                                        }
                                         echo ($string);
                                     @endphp
                                 </h1>
@@ -30,8 +36,8 @@
                             <thead>
                                 <tr class="bg-light">
                                     <th class="border-top-0">No</th>
-                                    <th class="border-top-0">Ibadah</th>
-                                    <th class="border-top-0">Tanggal</th>
+                                    <th class="border-top-0">Nama</th>
+                                    <th class="border-top-0">Nomor Telepon</th>
                                     <th class="border-top-0">Action</th>
                                 </tr>
                             </thead>

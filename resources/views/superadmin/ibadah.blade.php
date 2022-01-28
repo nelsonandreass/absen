@@ -139,7 +139,7 @@
                                 var foto = '/assets/img/user-black.png';
                                 $("#foto-jemaat").attr("src",foto);
                                 $("#greeting").hide();
-                            }, 5000);
+                            }, 50000);
                             
                         }
                         else if(data.error_code != '0000'){
