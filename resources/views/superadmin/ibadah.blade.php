@@ -21,12 +21,15 @@
                         </select>
                         <button class="btn btn-primary mt-3" id="btn">Lanjutkan</button>
                    </form>
-
+                    @php
+                        $tanggal;
+                    @endphp
+                    <input type="hidden" id="tanggal" value='{{$tanggal}}'>
                    <center id="absen" style="display:none;">
                         <div class="row">
                             <div class="col-10">&nbsp;</div>
                             <div class="col-2">
-                                <a href="{{url('/selesai',['ibadah1',$tanggal])}}">Selesai</a>
+                                <a id="url" >Selesai</a>
                             </div>
                         </div>
                         <div class="row">
@@ -82,6 +85,12 @@
             $("#btn").click(function(e){
                 e.preventDefault();
                 var jenisibadah = $("#option-ibadah").val();
+                var tanggal = $("#tanggal").val();
+                var string = "/selesai/"+jenisibadah+"/"+tanggal;
+              
+                console.log(string);
+                var url = $("#url").attr('href',string);
+                //console.log(tanggal);
                 if(jenisibadah != 'default'){
                     $("#option").hide();
                     $("#absen").show();

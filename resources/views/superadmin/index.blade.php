@@ -35,6 +35,9 @@
                                         Tarik data
                                     </div>
                                     <input type="hidden" id="tanggal" value={{$tanggal}}>
+                                    <input type="hidden" id="ibadah1" value={{$ibadah1}}>
+                                    <input type="hidden" id="ibadah2" value={{$ibadah2}}>
+
                                     <div class="col-md-2">
                                         <a href="{{url('/tarikdata')}}"class="">Detail</a>
                                     </div>
@@ -276,39 +279,54 @@
 
 <script>
     var tanggal = document.getElementById('tanggal').value;
+    var ibadah1 = document.getElementById('ibadah1').value;
+    var ibadah2 = document.getElementById('ibadah2').value;
+
     tanggal = tanggal.replace('[','');
     tanggal = tanggal.replace(']','');
     var tanggalsplit = tanggal.split(',');
-    console.log(tanggalsplit[0]);
-  const labels = tanggalsplit;
 
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'Ibadah 1',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45],
-    },
-    {
-      label: 'Ibadah 2',
-      backgroundColor: 'rgb(25, 99, 132)',
-      borderColor: 'rgb(25, 99, 132)',
-      data: [5, 11, 51, 21, 201, 301, 45],
-    }]
-  };
+    ibadah1 = ibadah1.replace('[','');
+    ibadah1 = ibadah1.replace(']','');
+    var ibadah1split = ibadah1.split(',');
 
-  const config = {
-    type: 'line',
-    data: data,
-    options: {}
-  };
-</script>
+    ibadah2 = ibadah2.replace('[','');
+    ibadah2 = ibadah2.replace(']','');
+    var ibadah2split = ibadah2.split(',');
 
-<script>
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-</script>
+
+    console.log(ibadah1);
+    const labels = tanggalsplit;
+    const data1 = ibadah1split;
+    const data2 = ibadah2split;
+
+    const data = {
+        labels: labels,
+        datasets: [{
+        label: 'Ibadah 1',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: data1,
+        },
+        {
+        label: 'Ibadah 2',
+        backgroundColor: 'rgb(25, 99, 132)',
+        borderColor: 'rgb(25, 99, 132)',
+        data: data2,
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+    </script>
+
+    <script>
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
 @endsection

@@ -25,16 +25,36 @@ class SuperAdminController extends Controller
     public function index(){
         $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
         $absens = Absen::select('jenis','tanggal')->orderBy('tanggal','DESC')->distinct('tanggal','jenis')->take('5')->get();
+        $tanggalDB = Absen::select('tanggal')->distinct('tanggal')->orderBy('tanggal','DESC')->take('5')->get();
+
         $arrayTanggal = array();
 
-        foreach($absens as $key => $absen){
-            array_push($arrayTanggal,$absen['tanggal']);
+        foreach($tanggalDB as $key => $dataTanggal){
+            array_push($arrayTanggal,$dataTanggal['tanggal']);
+           
         }
-       
-      
+        sort($arrayTanggal);
+        // var_dump($arrayTanggal);
+        // die("");
+
+        $ibadah1 = Counter::select('jumlah','tanggal')->where('jenis'  , 'ibadah1')->whereIn('tanggal' , $arrayTanggal)->get()->toJson();
+        $jumlahIbadah1 = array();
+        foreach(json_decode($ibadah1) as $data){
+            array_push($jumlahIbadah1,$data->jumlah);
+        }
+        // var_dump($jumlahIbadah1);
+        // //var_dump(json_decode($ibadah1));
+        // //var_dump(json_encode($ibadah1.TRUE));
+        // die("");
+        $ibadah2 =  Counter::select('jumlah','tanggal')->where('jenis'  , 'ibadah2')->whereIn('tanggal' , $arrayTanggal)->get()->toJson();
+        $jumlahIbadah2 = array();
+        foreach(json_decode($ibadah2) as $data){
+            array_push($jumlahIbadah2,$data->jumlah);
+        }
+        
         //$absens = DB::table('absens')->select('tanggal',DB::raw('count(id) as total'))->orderBy('tanggal','asc')->groupBy('tanggal')->get();
       
-        return view('superadmin.index' , ['beritas' => $beritas , 'absens' => $absens, 'tanggal' => json_encode($arrayTanggal)]);
+        return view('superadmin.index' , ['beritas' => $beritas , 'absens' => $absens, 'tanggal' => json_encode($arrayTanggal), 'ibadah1' => json_encode($jumlahIbadah1) , 'ibadah2' => json_encode($jumlahIbadah2)]);
     }
 
     public function tarikDataPage(){
