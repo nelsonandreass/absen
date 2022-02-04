@@ -15,6 +15,7 @@
                     <div class="col-4"></div>
                 </div>
                 <div class="row">&nbsp;</div>
+                <div class="text-center">Have a nice day!</div>
                 <div class="row">&nbsp;</div>
                 <span class="text-center">Have a nice Day!</span>
                 <div class="row">&nbsp;</div>

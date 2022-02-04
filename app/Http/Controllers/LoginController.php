@@ -48,7 +48,7 @@ class LoginController extends Controller
         );
         if(Auth::attempt($credential)){
             if(Auth::user()->role == "superadmin"){
-                return redirect('/super');
+                return redirect('/adminhome');
             }
             return redirect('/home');
         }

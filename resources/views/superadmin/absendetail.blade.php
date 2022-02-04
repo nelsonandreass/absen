@@ -1,30 +1,73 @@
 @extends('layout.layoutsuperadmin')
 
 @section('content')
-    <div class="page-wrapper">
-        <div class="container-fluid">
-           <table class="table table-striped">
-                <thead>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>No Telepon</th>
-                    <th>Foto</th>
-                </thead>
-                <tbody>
-                    <?php $i = 1?>
-                    @foreach($datas as $data)
+
+    <div class="page-wrapper p-3">  
+        <div class="row">
+            <!-- column -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- title -->
+                        <div class="d-md-flex">
+                            <div>
+                                <h1>
+                                    @php    
+                                        $string = strtoupper($ibadah);
+                                        if($string == 'IBADAH1'){
+                                            $string = 'IBADAH 1';
+                                        }
+                                        else if($string == 'IBADAH2'){
+                                            $string = 'IBADAH 2';
+                                        }
+                                        echo ($string);
+                                    @endphp
+                                </h1>
+                                <h2>
+                                    {{$tanggal}}
+                                </h2>
+                            </div>
+                            
+                        </div>
+                        <!-- title -->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table v-middle table-striped">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th class="border-top-0">No</th>
+                                    <th class="border-top-0">Nama</th>
+                                    <th class="border-top-0">Nomor Telepon</th>
+                                    <th class="border-top-0">Foto</th>
+                                    <th class="border-top-0">Jam Kehadiran</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1;?>
+                                @foreach($datas as $data)
+                                    @foreach($data->users as $user)
+                                        <tr>
+                                            <td>{{$i}}</td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->nomor_telepon}}</td>
+                                            <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
+                                            <td>{{$data->created_at}}</td>
+                                        </tr>
+                                        <?php $i++?>
+                                    @endforeach
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    
                         
-                            <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$data->name}}</td>
-                                <td>{{$data->telepon}}</td>
-                                <td><img src="{{asset('storage/'.$data->foto)}}" class="icon" alt="{{$data->foto}}"></td>
-                            </tr>
-                            <?php $i++?>
-                        
-                    @endforeach
-                </tbody>
-           </table> 
+                    </div>
+                    <div class="row">
+                        <div class="col-3 m-3">Jumlah Kehadiran <?php echo $i-1;?></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 @endsection

@@ -1,7 +1,13 @@
 body{
-    font-family: 'Poppins', sans-serif !important;
-    background-color: #f8f9fa !important;
-  
+    /* font-family: 'Roboto', sans-serif; */
+    /* font-family: 'Poppins', sans-serif !important; */
+    /* background-color: #f8f9fa !important; */
+}
+.testing{
+    background-color: red;
+}
+.font-poppins{
+    font-family: 'Poppins', serif !important;
 }
 .bg-transparent {
     background-color: rgb(250, 250, 250) !important;
