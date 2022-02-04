@@ -16,7 +16,7 @@
                 </div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
+                <span class="text-center">Have a nice Day!</span>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>

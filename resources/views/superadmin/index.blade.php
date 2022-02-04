@@ -30,15 +30,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-md-flex align-items-center">
-                                    <div>
-                                        <h4 class="card-title">Sales Summary</h4>
+                                    <div>   
+                                        <h4 class="card-title">Attendence summary</h4>
                                         <h5 class="card-subtitle">Overview of Latest Month</h5>
                                     </div>
                                     <div class="ms-auto d-flex no-block align-items-center">
                                         <ul class="list-inline font-12 dl m-r-15 m-b-0">
-                                            <li class="list-inline-item text-info"><i class="fa fa-circle"></i> Iphone
+                                            <li class="list-inline-item text-info"><i class="fa fa-circle"></i> Ibadah 1
                                             </li>
-                                            <li class="list-inline-item text-primary"><i class="fa fa-circle"></i> Ipad
+                                            <li class="list-inline-item text-primary"><i class="fa fa-circle"></i> Ibadah 2
                                             </li>
                                         </ul>
                                     </div>
