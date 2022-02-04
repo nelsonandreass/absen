@@ -10,8 +10,10 @@
                     <!-- title -->
                     <div class="d-md-flex">
                         <div>
-                            <h4 class="card-title">Tarik Data</h4>
-                            <h5 class="card-subtitle">Get Data</h5>
+                            <h4 class="card-title">Jemaat Tidak Hadir</h4>
+                            <pre></pre>
+                            
+
                         </div>
                     </div>
                     <!-- title -->
@@ -32,6 +34,8 @@
                             </div>
                         </div>
                     </form>
+                    <br>&nbsp;
+                    <br>&nbsp;
 
                     <table class="table table-striped">
                         <thead>

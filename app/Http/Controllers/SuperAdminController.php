@@ -26,21 +26,19 @@ class SuperAdminController extends Controller
         $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
         $absens = Absen::select('jenis','tanggal')->orderBy('tanggal','DESC')->distinct('tanggal','jenis')->take('5')->get();
         $tanggalDB = Absen::select('tanggal')->distinct('tanggal')->orderBy('tanggal','DESC')->take('5')->get();
-
         $arrayTanggal = array();
 
         foreach($tanggalDB as $key => $dataTanggal){
             array_push($arrayTanggal,$dataTanggal['tanggal']);
-           
         }
         sort($arrayTanggal);
       
-        $ibadah1 = Counter::select('jumlah','tanggal')->where('jenis'  , 'ibadah1')->whereIn('tanggal' , $arrayTanggal)->get()->toJson();
+        $ibadah1 = Counter::select('jumlah' , 'tanggal')->where('jenis' , 'ibadah1')->whereIn('tanggal' , $arrayTanggal)->get()->toJson();
         $jumlahIbadah1 = array();
         foreach(json_decode($ibadah1) as $data){
             array_push($jumlahIbadah1,$data->jumlah);
         }
-        $ibadah2 =  Counter::select('jumlah','tanggal')->where('jenis'  , 'ibadah2')->whereIn('tanggal' , $arrayTanggal)->get()->toJson();
+        $ibadah2 =  Counter::select('jumlah' , 'tanggal')->where('jenis' , 'ibadah2')->whereIn('tanggal' , $arrayTanggal)->get()->toJson();
         $jumlahIbadah2 = array();
         foreach(json_decode($ibadah2) as $data){
             array_push($jumlahIbadah2,$data->jumlah);
@@ -154,14 +152,16 @@ class SuperAdminController extends Controller
     }
 
     public function absenDetail($ibadah,$tanggal){
-        $datas = Absen::with('users')->select('user_id','jenis','tanggal')->where('jenis',$ibadah)->where('tanggal',$tanggal)->get();
+        $datas = Absen::with('users')->select('user_id','jenis','tanggal','created_at')->where('jenis',$ibadah)->where('tanggal',$tanggal)->get();
         return view('superadmin.absendetail' , ['datas' => $datas, 'ibadah' => $ibadah , 'tanggal' => $tanggal]);
     }
 
     public function selesaiProcess($jenis,$tanggal){
         $count = Absen::where('jenis',$jenis)->where('tanggal',$tanggal)->count();
+        $checkCount = Counter::where('jenis',$jenis)->where('tanggal',$tanggal)->exists();
        
-        if($count == 0){
+        if($checkCount == false){
+            
             $data = new Counter;
             $data->jenis = $jenis;
             $data->tanggal = $tanggal;

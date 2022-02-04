@@ -38,7 +38,8 @@
                                     <th class="border-top-0">No</th>
                                     <th class="border-top-0">Nama</th>
                                     <th class="border-top-0">Nomor Telepon</th>
-                                    <th class="border-top-0">Action</th>
+                                    <th class="border-top-0">Foto</th>
+                                    <th class="border-top-0">Jam Kehadiran</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,6 +51,7 @@
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->nomor_telepon}}</td>
                                             <td><img src="{{asset('storage/'.$user->foto)}}" class="icon" alt="{{$user->foto}}"></td>
+                                            <td>{{$data->created_at}}</td>
                                         </tr>
                                         <?php $i++?>
                                     @endforeach
@@ -61,7 +63,7 @@
                         
                     </div>
                     <div class="row">
-                    
+                        <div class="col-3 m-3">Jumlah Kehadiran <?php echo $i-1;?></div>
                     </div>
                 </div>
             </div>

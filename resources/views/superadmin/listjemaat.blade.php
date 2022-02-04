@@ -49,6 +49,7 @@
                                     <td>
                                         <a href="{{url('/showjemaat', $user->id)}}" class="btn btn-primary">Edit</a>
                                     </td>
+                                    
                                 </tr>
                                 <?php $i++?>
                             @endforeach
