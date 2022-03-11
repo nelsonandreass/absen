@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-4"></div>
                             <div class="col-4">
-                                <img class="col-12 no-absen" style="width: 60%" src="{{asset('/assets/img/user-black.png')}}" id="foto-jemaat" alt="">
+                                <img class="col-12 no-absen" style="width: 70%" src="{{asset('/assets/img/user-black.png')}}" id="foto-jemaat" alt="">
                             </div>
                             <div class="col-4"></div>
                             

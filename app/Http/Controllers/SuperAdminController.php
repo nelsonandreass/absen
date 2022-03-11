@@ -25,7 +25,7 @@ class SuperAdminController extends Controller
     public function index(){
         $beritas = Berita::select('judul','wadah')->orderBy('created_at','desc')->distinct('wadah')->take('4')->get();
         $absens = Absen::select('jenis','tanggal')->orderBy('tanggal','DESC')->distinct('tanggal','jenis')->take('5')->get();
-        $tanggalDB = Absen::select('tanggal')->distinct('tanggal')->orderBy('tanggal','DESC')->take('5')->get();
+        $tanggalDB = Absen::select('tanggal')->distinct('tanggal')->orderBy('tanggal','DESC')->take('6')->get();
         $arrayTanggal = array();
 
         foreach($tanggalDB as $key => $dataTanggal){
@@ -186,7 +186,7 @@ class SuperAdminController extends Controller
     public function listjemaat(){
         //$users = User::where('role' , 'user')->orderBy('name','asc')->paginate(50);
         //$users = User::where('role' , 'user')->where('name' , 'LIKE' , 'y%')->orderBy('name','asc')->get();
-        $users = User::where('role' , 'user')->select('id','name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto')->orderBy('name','asc')->paginate(50);
+        $users = User::where('role' , 'user')->select('id','name' , 'nomor_telepon' , 'alamat' , 'kartu' , 'foto')->orderBy('name','asc')->paginate(100);
 
       
         return view('superadmin.listjemaat' , ['users' => $users, 'json' => json_encode($users)]);
